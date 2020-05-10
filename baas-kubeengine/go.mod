@@ -6,6 +6,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-contrib/sessions v0.0.0-20190512062852-3cb4c4f2d615 // indirect
 	github.com/gin-gonic/gin v1.4.0
+	github.com/go-delve/delve v1.4.0 // indirect
 	github.com/jonluo94/baasmanager/baas-core v0.0.0
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 	github.com/spf13/viper v1.4.0
