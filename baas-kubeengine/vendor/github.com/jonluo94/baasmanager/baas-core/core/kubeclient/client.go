@@ -5,10 +5,12 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+
+	"github.com/jonluo94/baasmanager/baas-core/common/log"
 	"k8s.io/client-go/kubernetes"
+	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 )
 
 var logger = log.GetLogger("kubeclient", log.INFO)
