@@ -1,7 +1,7 @@
 # fabric引擎端口
 BaasFabricEnginePort: 4991
 # baas 的根目录
-BaasRootPath: /Users/luweb/code/pro/baasmanager
+BaasRootPath: /Users/blockchain/baas/data
 # nfs server ip
 BaasNfsServer: 118.89.37.37
 # k8s引擎地址
@@ -16,4 +16,4 @@ BaasChaincodeGithub: github.com/baaschaincodes
 OrdererBatchTimeout: 1s
 OrdererMaxMessageCount: 10
 OrdererAbsoluteMaxBytes: 99 MB
-OrdererPreferredMaxBytes:  512 KB
+OrdererPreferredMaxBytes: 512 KB

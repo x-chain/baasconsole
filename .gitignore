@@ -1,3 +1,12 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .idea/**
+on/**
+baas-kubeengine/on/**
+baas-fabricengine/on/**
+baas-frontend/build/**
+baas-gateway/on/**
+bin/**
+bin_mac/**
+bin_x86/**
+**/.DS_Store
