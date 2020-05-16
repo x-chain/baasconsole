@@ -19,6 +19,15 @@ hasCommandByType(){
         return 0
     fi
 }
+hasCommandByType gcc
+returnVue=$?
+echo $returnVue
+if [ $returnVue == 0 ] ;
+then
+    echo "gcc runtime is not install"
+    apt update;apt install -y gcc
+fi
+
 hasCommandByType go
 returnVue=$?
 echo $returnVue
@@ -27,7 +36,7 @@ then
     echo "golang runtime is not install"
     rm -rf go*.tar.gz
     wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz
-    tar -xvzf go1.14.linux-amd64.tar.gz -C /usr/local
+    tar -xzf go1.14.linux-amd64.tar.gz -C /usr/local
     sed -i '/GOROOT/d' /etc/profile
     sed -i '$a\export GOROOT=/usr/local/go' /etc/profile
     sed -i '$a\export PATH=$GOROOT/bin:$PATH' /etc/profile
@@ -41,8 +50,8 @@ if [ $returnVue == 0 ] ;
 then
     echo "nodejs runtime is not install"
     rm -rf node*.tar.gz
-    wget wget http://nodejs.org/dist/node-latest.tar.gz
-    tar -xvzf node-latest.tar.gz -C /usr/local
+    wget http://nodejs.org/dist/node-latest.tar.gz
+    tar -xzf node-latest.tar.gz -C /usr/local
     sed -i '/NODE_HOME/d' /etc/profile
     sed -i '$a\export NODE_HOME=/usr/local/node' /etc/profile
     sed -i '$a\export PATH=$NODE_HOME/bin:$PATH' /etc/profile

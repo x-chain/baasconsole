@@ -1,0 +1,232 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: baasmanager
+  namespace: default
+  labels:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 1.17.9
+data:
+  baas.conf: |-
+    # baas-gateway地址
+    upstream baasapi {
+        server localhost:6991;
+    }
+    # HTTP server
+    server {
+        listen       8080;
+        server_name  baasadmin;
+
+        location /nginx_status {
+                stub_status on;
+                access_log off;
+        }
+        location /api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+        location /dev-api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+        location /stage-api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+
+        location / {
+            root   /usr/share/nginx/baas;
+            index  index.html index.htm;
+        }
+
+        location ~ ^/favicon\.ico$ {
+            root   baas;
+        }
+            
+    }
+
+  gwconfig.yaml: |-
+    # gateway引擎端口
+    BaasGatewayPort: 6991
+    # fabric引擎地址
+    BaasFabricEngine: http://localhost:4991
+    # db配置
+    BaasGatewayDbconfig: /etc/baas/dbconfig.yaml
+  dbconfig.yaml: |-
+    xorm:
+      drivename: mysql
+      ip: 118.89.37.37
+      port: 3306
+      database: baas_api
+      user: root
+      password: 123456
+      #是否显示sql语句
+      showsql: true
+      #连接池中idle态链接最大个数
+      maxidle: 10
+      #连接池最大打开连接数
+      maxopen: 5
+  keconfig.yaml: |-
+    # k8s引擎端口
+    BaasKubeEnginePort: 5991
+    # k8s集群master config
+    BaasKubeMasterConfig: /etc/baas/config
+  k8sconfig: |-
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01EVXhNakF3TlRRMU5Gb1hEVE13TURVeE1EQXdOVFExTkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTnRBClhlYWgvSHdGSkhXeENLdVNEcDBtN21IRGZBWXkzUSszWE5MbnRVcW1HVTE4a0MvV3V1aVJQTmxsY0cwTDBtQnQKQmVEc0Jnb09IV2EwY2I4aWZYNGhWTDVYbnpFL0tvVDN4ZzJxWVdlUHpKQUtZYzdEWTF2MzJaYlErbk11VmtkSAp2cEcvQm1vK09VTjFVYWM2a2tKM2IzcFJyVXNvN1o5RnR2dC9vSERKVVNvS1lrck42UktKTGNjMmhyaWl5M0l0CmdQd05UeVBsYTdaeGRIcUdPMzY1OHd4M1NmcDErMG5lTE45STI4N29EOXhYZElLRjBKSjBSYVpsaXp0bzVLQ08KUkdIaDJ2a0tMYjhTRDR6OG9MUHFVY28zYlZKS0FyRFNrSURMQSt6V1NBcHVaQVgreU9zM00yZHBJRWpWSXBCdgpBcy9sOHp4TUVDeENKMnVRQ2QwQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJNldXejdEVGsrTDZlNGxJV24vaEorYU1oUGcKelk0K3N1MndaS3dUZWEza04zRzNQWm9GYys4U09Gb1o3cG5abzMxOVhlQmJlYTJsM2F5VHQ4NENKUHNyUllrRgpaaGlyK2JqcGZZK2d5S2h0YjFuYW14ZFBUT0YvdnI4UFNmZ2JHOFE5alY2MzRLK1VmanRMTjY1QnBqcmJSd2tTClBhai8rQnVZVGFoVjRNL0kwNFU1YXdvWlpydks3bVZ4TXY0VjlvN3lnNG1UMkRnOVR6R21FanNFR1pncjU3ZDEKTG1wSk5qK2MzY3EzSFpVTVVGK2t2dC9UMTZkamZpS2w5cWlFV0VONTgyMlptcGtlUWR5TFgrdCtWUlVHWi9yQQprOFR0L3lKU1lLc1VscEdTeGRSR2FrMTI1d2FubVBGWDhQbHZUZm5vcUlEZXh6dzBOc0NIYmJFNDdobz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+        server: https://kubernetes.docker.internal:6443
+      name: docker-desktop
+    contexts:
+    - context:
+        cluster: docker-desktop
+        user: docker-desktop
+      name: docker-desktop
+    - context:
+        cluster: docker-desktop
+        user: docker-desktop
+      name: docker-for-desktop
+    current-context: docker-desktop
+    kind: Config
+    preferences: {}
+    users:
+    - name: docker-desktop
+      user:
+        client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM5RENDQWR5Z0F3SUJBZ0lJUlNRRDI0YnBXMDR3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TURBMU1USXdNRFUwTlRSYUZ3MHlNVEExTVRNeE5ESXpNVE5hTURZeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sc3dHUVlEVlFRREV4SmtiMk5yWlhJdFptOXlMV1JsCmMydDBiM0F3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ2Y3QzhSMysyT1JWQjIKU3drSjRLR1RRMVd4QUNLTTM4RlN1UTM5MXg3Zk9mZmNjaU9YaHdjYndVU1dpbG4rZ3RvMFlkMWRoRzBLd0ltego2R1ZNeHo4NTJVZTFFVFA0UjdFWUpYeHJUb0R4MHo1MDUrNDV3b0gyZ3dGZEtydS9HSjB1WkNJQmxYTWpmeTc4CmkxZFZFL1NnM2ZZYVZKTzROUjZxL1BaUGYrSElDOUFCN2Fub2lFQS9ZcTlNRmtJdmVFTWh4YXlpNENFUlZwRXoKQmtQd05GL251UzQ3eURXOHpYU045UXJncGM4ZVdUcXhIZlFQRTB3Z3NxSEN3eGlISnRtdkxvWjU5cWtoVFlHRApvVkRKNnhIa3BvOWd1dyttM3JwbjhOVlFwdEpYWjFUekRISlVEdktKWWJNUFZRUnVjVlVYdlF2elNUYm9ZWnNZClNHWHhSQWxWQWdNQkFBR2pKekFsTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUYKQlFjREFqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFObDhJN0lhSGlxTTgzY2VoQ1BoTXRZVVVqQlZMdHFEMApHOGZlWnlMejBUQ1o0MWMzWXJtL1pidVNWWDlERkZFWU1uekIra0ZOZ2VlZjZ1aTc0ZlV3TGxtKy9nMUZja0tUCjNTbjREYTdtUlMyWFB0cnBXMUJvay9QQlNrR1lsZW1MeHhHRnJEZ1JQakJVdVlQWW9sLy82YmV1NHZ5dk9sakMKL3EvRTdnaDZJcWQxZFoyRWtORjNxdTgyR2dYNkU0a3JwMTBCZWo1VGZXOEh0Y3FtbjlFMm1UbFc0QWJDWHd0WQphQXB2SzJ1OHl1NlB0UVVobkxHU1FTaVl6Yys2aTdYWFovZy9qN0xmdHlOeTAyZHdGQVQ4cHpFOVgwUWVNL0FUCjl5NzJUb3JzRHlXSVJOK01RQmdjaWZtSGgvNDV0aFp3MVJFZmEvd0ppQ1N2bnZwMmgxTmhwQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+        client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb0FJQkFBS0NBUUVBbit3dkVkL3Rqa1ZRZGtzSkNlQ2hrME5Wc1FBaWpOL0JVcmtOL2RjZTN6bjMzSElqCmw0Y0hHOEZFbG9wWi9vTGFOR0hkWFlSdENzQ0pzK2hsVE1jL09kbEh0UkV6K0VleEdDVjhhMDZBOGRNK2RPZnUKT2NLQjlvTUJYU3E3dnhpZExtUWlBWlZ6STM4dS9JdFhWUlAwb04zMkdsU1R1RFVlcXZ6MlQzL2h5QXZRQWUycAo2SWhBUDJLdlRCWkNMM2hESWNXc291QWhFVmFSTXdaRDhEUmY1N2t1TzhnMXZNMTBqZlVLNEtYUEhsazZzUjMwCkR4Tk1JTEtod3NNWWh5YlpyeTZHZWZhcElVMkJnNkZReWVzUjVLYVBZTHNQcHQ2NlovRFZVS2JTVjJkVTh3eHkKVkE3eWlXR3pEMVVFYm5GVkY3MEw4MGsyNkdHYkdFaGw4VVFKVlFJREFRQUJBb0gvQVQvWEhreWhqbnI4SmZCdwpJYU9mbjRibkpIcmJ5ajMxUkxBdGE4NUNiM3dFYzdSd2tyNTdUN3d5elBwSHViVkwveHpFbmZacTQ2cWRhTXBvCkFER09UT1ZscWdSNFkzZ3I2Z1JnOUhXb2pEc2FRYytPRE9WNEhuVG5qZExIcExhTWc5QkVjNzYzSjQvV3ppSkkKakdHYmg2WTBSZ0JqSncxRE1CTEoyZFVsN21vbUMvUVZzTjVHa2xmU3g3d3pMeGZWZXBqSmNBQ1RQU3htRG9zMgpoaHZqTHlOYWhpV1lvYzhjeWxGNVo2YjVxUy9XZDZPeHAwUXVobU1IS21KdkdVNU5yZU9GM2NUVFh2bmZWYjUzCktFUTJxeGQxWVQ4TGo1cTJ3Vm96WS9oWGNNNkJXeU1iTU1LRFJwSXJvZlJpNGtNNlFER3hQWWVwbzhhVDE4NSsKbmh2WkFvR0JBTklMaWE2QkQ3d3F0eFR0R3FpQjlDdDVpZWtmRUZDVDdTOGZUWmhsNjV3UUVQVHJzcXl5OWl4VApZc2VqazZqOENDbU9sUFZocjVITGdIbzNQQzJWTDZhUVREYVErKytleUQ1WmtwTElaamJLUEd5djNmbDM4RkFsCkJXSVZQY0VvQXNVazZSYU9GT3R2MStpQVhqSTVaT0VjTS85YUlHMi9EZXVIZzdtb0w4b2JBb0dCQU1McFV5anQKZk12RmVRcVhmaVFJQWM1eEdiOGV6akdkbDhTYkZpTGhGQjVVWTJTUUJpVlY5L3VEY0dhczRYNE5rVDFsZEZreQplTlVNYTJEV3VpMFRRN1VHU0c5RG9pZWI1aHRiS0VxajFXTnpXZVpXcHE3Ynl6dzZjUlFsaTF5Y2Ezcjc2REhYCklBS08wTEIrOUdiaC9qSkZrRlQ4dFROeE4rQmZtWFg3MkxGUEFvR0FmVzc0ZEthTUlBR2VQYmZ1Z0l6Q3BLZTcKRE9WSkYrV084ZUlPczZEQjEvdmNOSGNBeDVORDRXcVdoY1FRclF4OVQxdmZacjVFVzV1Y2lOK3RaMGM5SW9udgppWEtCa1RKUVFMTzdEVDd4azJ5b012dS9ZbmdXb2JYS0JpM0xLQ3RkcEIrTHRyVjRsclMreWhER3I5V0lnY29XCjN6b1NQWmVubDJ6ZzVDRWxFTnNDZ1lCc01NdWlXa0Q5Y3oyKzdWeHRiNnhoQlZLL1RjQXl0a0Y2Tm9QUkZKTHcKU3ZObzdMRWNwRjJrVk05ZGp2VVQzVUFUam05STI4VktyVHdsWXN1eEhaSmx0M2tabWJjMnVVaS9RcGhZNWh3YQp1ZnJhNnBwWFVWVzh0c3Z4M08xQW1Pcm9OMUFwNmptd2NjblJUb2NuWEthWERSb1NzcnQ2Tkl4SmxZYy9nRzVGCjdRS0JnSGtvVG5TeTVsSWRlYjE5Qk9qb3QrWU9JNGxONzlqRjFrSG9iZ2VvRTA3aTNpL0pqZDNvYWYzb2hxRzYKRkRHbUlISHA2ZEN4WUFqSENUd3htUXRvMWloUXhtVkpTd1pQRWRwSm5hcXd6U28wajhZWU9aUktpaHlOQmJKVQpqdWcydlQ1djE3b1NNUGQzcmlKUHprNEdUaTRTOFJCVlMzcWxGalhBVndCVFJPYTYKLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K
+  feconfig.yaml: |-
+    # fabric引擎端口
+    BaasFabricEnginePort: 4991
+    # baas 的根目录
+    BaasRootPath: /home/ubuntu/data/baas/
+    # nfs server ip
+    BaasNfsServer: 118.89.37.37
+    # k8s引擎地址
+    BaasKubeEngine: http://localhost:5991
+    # 在baas根目录下nfs共享目录
+    BaasNfsShared: baas-nfsshared
+    # 在baas根目录下fabric k8s模板目录
+    BaasTemplate: baas-template
+    # 保存chaincode的gopath下的src目录
+    BaasChaincodeGithub: github.com/baaschaincodes
+    # 共识排序参数
+    OrdererBatchTimeout: 1s
+    OrdererMaxMessageCount: 10
+    OrdererAbsoluteMaxBytes: 99 MB
+    OrdererPreferredMaxBytes: 512 KB
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baasmanager
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: baasmanager
+      app.kubernetes.io/instance: 1.17.9
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: baasmanager
+        app.kubernetes.io/instance: 1.17.9
+    spec:
+      containers:
+        - name: baas-gateway
+          image: luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["/app/baas-gateway"]
+          ports:
+            - containerPort: 6991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/etc/baas/"
+              subPath: gwconfig.yaml
+            - name: baasmanager
+              mountPath: "/etc/baas/"
+              subPath: dbconfig.yaml
+        - name: baas-kubeengine
+          image: luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["/app/baas-kubeengine"]
+          ports:
+            - containerPort: 5991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/etc/baas/"
+              subPath: keconfig.yaml
+            - name: baasmanager
+              mountPath: "/etc/baas/"
+              subPath: config
+        - name: baas-fabricengine
+          image: luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["baas-fabricengine"]
+          ports:
+            - containerPort: 4991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/etc/baas/"
+              ubPath: feconfig.yaml
+        - name: baas-frontend
+          image: luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/etc/nginx/conf.d/"
+              subPath: baas.conf
+      volumes:
+        - name: baasmanager
+          configMap:
+            name: baasmanager
+        - name: nfs-client-root
+          nfs:
+            server: 118.89.37.37
+            path: /home/ubuntu/data/baas/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baasmanager
+  namespace: default
+  labels:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 1.17.9
+spec:
+  type: NodePort
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: 8080
+      nodePort: 32600
+    - name: gateway-port
+      port: 6991
+      targetPort: 6991
+      nodePort: 32601
+    - name: kubeengine-port
+      port: 5991
+      targetPort: 5991
+      nodePort: 32602
+    - name: fabricengine-port
+      port: 4991
+      targetPort: 4991
+      nodePort: 32603
+  selector:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 1.17.9
