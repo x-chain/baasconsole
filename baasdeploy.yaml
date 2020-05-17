@@ -58,7 +58,7 @@ data:
     # fabric引擎地址
     BaasFabricEngine: http://localhost:4991
     # db配置
-    BaasGatewayDbconfig: /etc/baas/dbconfig.yaml
+    BaasGatewayDbconfig: /etc/gateway/dbconfig.yaml
   dbconfig.yaml: |-
     xorm:
       drivename: mysql
@@ -77,7 +77,7 @@ data:
     # k8s引擎端口
     BaasKubeEnginePort: 5991
     # k8s集群master config
-    BaasKubeMasterConfig: /etc/baas/config
+    BaasKubeMasterConfig: /etc/k8sconfig/config
   k8sconfig: |-
     apiVersion: v1
     clusters:
@@ -85,29 +85,77 @@ data:
         certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01EVXhNakF3TlRRMU5Gb1hEVE13TURVeE1EQXdOVFExTkZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTnRBClhlYWgvSHdGSkhXeENLdVNEcDBtN21IRGZBWXkzUSszWE5MbnRVcW1HVTE4a0MvV3V1aVJQTmxsY0cwTDBtQnQKQmVEc0Jnb09IV2EwY2I4aWZYNGhWTDVYbnpFL0tvVDN4ZzJxWVdlUHpKQUtZYzdEWTF2MzJaYlErbk11VmtkSAp2cEcvQm1vK09VTjFVYWM2a2tKM2IzcFJyVXNvN1o5RnR2dC9vSERKVVNvS1lrck42UktKTGNjMmhyaWl5M0l0CmdQd05UeVBsYTdaeGRIcUdPMzY1OHd4M1NmcDErMG5lTE45STI4N29EOXhYZElLRjBKSjBSYVpsaXp0bzVLQ08KUkdIaDJ2a0tMYjhTRDR6OG9MUHFVY28zYlZKS0FyRFNrSURMQSt6V1NBcHVaQVgreU9zM00yZHBJRWpWSXBCdgpBcy9sOHp4TUVDeENKMnVRQ2QwQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJNldXejdEVGsrTDZlNGxJV24vaEorYU1oUGcKelk0K3N1MndaS3dUZWEza04zRzNQWm9GYys4U09Gb1o3cG5abzMxOVhlQmJlYTJsM2F5VHQ4NENKUHNyUllrRgpaaGlyK2JqcGZZK2d5S2h0YjFuYW14ZFBUT0YvdnI4UFNmZ2JHOFE5alY2MzRLK1VmanRMTjY1QnBqcmJSd2tTClBhai8rQnVZVGFoVjRNL0kwNFU1YXdvWlpydks3bVZ4TXY0VjlvN3lnNG1UMkRnOVR6R21FanNFR1pncjU3ZDEKTG1wSk5qK2MzY3EzSFpVTVVGK2t2dC9UMTZkamZpS2w5cWlFV0VONTgyMlptcGtlUWR5TFgrdCtWUlVHWi9yQQprOFR0L3lKU1lLc1VscEdTeGRSR2FrMTI1d2FubVBGWDhQbHZUZm5vcUlEZXh6dzBOc0NIYmJFNDdobz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
         server: https://kubernetes.docker.internal:6443
       name: docker-desktop
+    - cluster:
+        certificate-authority: /etc/k8sconfig/ca-hou02-mycluster.pem
+        server: https://c6.hou02.containers.cloud.ibm.com:30948
+      name: mycluster/bqrvi4bd01rn5kmc0flg
     contexts:
     - context:
         cluster: docker-desktop
         user: docker-desktop
-      name: docker-desktop
-    - context:
-        cluster: docker-desktop
-        user: docker-desktop
       name: docker-for-desktop
-    current-context: docker-desktop
+    - context:
+        cluster: mycluster/bqrvi4bd01rn5kmc0flg
+        namespace: default
+        user: luweb@foxmail.com/cf1b8d269da816c6bf803b6591761eca
+      name: mycluster/bqrvi4bd01rn5kmc0flg
+    current-context: docker-for-desktop
+    # current-context: mycluster/bqrvi4bd01rn5kmc0flg
     kind: Config
     preferences: {}
     users:
     - name: docker-desktop
       user:
-        client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM5RENDQWR5Z0F3SUJBZ0lJUlNRRDI0YnBXMDR3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TURBMU1USXdNRFUwTlRSYUZ3MHlNVEExTVRNeE5ESXpNVE5hTURZeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sc3dHUVlEVlFRREV4SmtiMk5yWlhJdFptOXlMV1JsCmMydDBiM0F3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ2Y3QzhSMysyT1JWQjIKU3drSjRLR1RRMVd4QUNLTTM4RlN1UTM5MXg3Zk9mZmNjaU9YaHdjYndVU1dpbG4rZ3RvMFlkMWRoRzBLd0ltego2R1ZNeHo4NTJVZTFFVFA0UjdFWUpYeHJUb0R4MHo1MDUrNDV3b0gyZ3dGZEtydS9HSjB1WkNJQmxYTWpmeTc4CmkxZFZFL1NnM2ZZYVZKTzROUjZxL1BaUGYrSElDOUFCN2Fub2lFQS9ZcTlNRmtJdmVFTWh4YXlpNENFUlZwRXoKQmtQd05GL251UzQ3eURXOHpYU045UXJncGM4ZVdUcXhIZlFQRTB3Z3NxSEN3eGlISnRtdkxvWjU5cWtoVFlHRApvVkRKNnhIa3BvOWd1dyttM3JwbjhOVlFwdEpYWjFUekRISlVEdktKWWJNUFZRUnVjVlVYdlF2elNUYm9ZWnNZClNHWHhSQWxWQWdNQkFBR2pKekFsTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUYKQlFjREFqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFObDhJN0lhSGlxTTgzY2VoQ1BoTXRZVVVqQlZMdHFEMApHOGZlWnlMejBUQ1o0MWMzWXJtL1pidVNWWDlERkZFWU1uekIra0ZOZ2VlZjZ1aTc0ZlV3TGxtKy9nMUZja0tUCjNTbjREYTdtUlMyWFB0cnBXMUJvay9QQlNrR1lsZW1MeHhHRnJEZ1JQakJVdVlQWW9sLy82YmV1NHZ5dk9sakMKL3EvRTdnaDZJcWQxZFoyRWtORjNxdTgyR2dYNkU0a3JwMTBCZWo1VGZXOEh0Y3FtbjlFMm1UbFc0QWJDWHd0WQphQXB2SzJ1OHl1NlB0UVVobkxHU1FTaVl6Yys2aTdYWFovZy9qN0xmdHlOeTAyZHdGQVQ4cHpFOVgwUWVNL0FUCjl5NzJUb3JzRHlXSVJOK01RQmdjaWZtSGgvNDV0aFp3MVJFZmEvd0ppQ1N2bnZwMmgxTmhwQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-        client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb0FJQkFBS0NBUUVBbit3dkVkL3Rqa1ZRZGtzSkNlQ2hrME5Wc1FBaWpOL0JVcmtOL2RjZTN6bjMzSElqCmw0Y0hHOEZFbG9wWi9vTGFOR0hkWFlSdENzQ0pzK2hsVE1jL09kbEh0UkV6K0VleEdDVjhhMDZBOGRNK2RPZnUKT2NLQjlvTUJYU3E3dnhpZExtUWlBWlZ6STM4dS9JdFhWUlAwb04zMkdsU1R1RFVlcXZ6MlQzL2h5QXZRQWUycAo2SWhBUDJLdlRCWkNMM2hESWNXc291QWhFVmFSTXdaRDhEUmY1N2t1TzhnMXZNMTBqZlVLNEtYUEhsazZzUjMwCkR4Tk1JTEtod3NNWWh5YlpyeTZHZWZhcElVMkJnNkZReWVzUjVLYVBZTHNQcHQ2NlovRFZVS2JTVjJkVTh3eHkKVkE3eWlXR3pEMVVFYm5GVkY3MEw4MGsyNkdHYkdFaGw4VVFKVlFJREFRQUJBb0gvQVQvWEhreWhqbnI4SmZCdwpJYU9mbjRibkpIcmJ5ajMxUkxBdGE4NUNiM3dFYzdSd2tyNTdUN3d5elBwSHViVkwveHpFbmZacTQ2cWRhTXBvCkFER09UT1ZscWdSNFkzZ3I2Z1JnOUhXb2pEc2FRYytPRE9WNEhuVG5qZExIcExhTWc5QkVjNzYzSjQvV3ppSkkKakdHYmg2WTBSZ0JqSncxRE1CTEoyZFVsN21vbUMvUVZzTjVHa2xmU3g3d3pMeGZWZXBqSmNBQ1RQU3htRG9zMgpoaHZqTHlOYWhpV1lvYzhjeWxGNVo2YjVxUy9XZDZPeHAwUXVobU1IS21KdkdVNU5yZU9GM2NUVFh2bmZWYjUzCktFUTJxeGQxWVQ4TGo1cTJ3Vm96WS9oWGNNNkJXeU1iTU1LRFJwSXJvZlJpNGtNNlFER3hQWWVwbzhhVDE4NSsKbmh2WkFvR0JBTklMaWE2QkQ3d3F0eFR0R3FpQjlDdDVpZWtmRUZDVDdTOGZUWmhsNjV3UUVQVHJzcXl5OWl4VApZc2VqazZqOENDbU9sUFZocjVITGdIbzNQQzJWTDZhUVREYVErKytleUQ1WmtwTElaamJLUEd5djNmbDM4RkFsCkJXSVZQY0VvQXNVazZSYU9GT3R2MStpQVhqSTVaT0VjTS85YUlHMi9EZXVIZzdtb0w4b2JBb0dCQU1McFV5anQKZk12RmVRcVhmaVFJQWM1eEdiOGV6akdkbDhTYkZpTGhGQjVVWTJTUUJpVlY5L3VEY0dhczRYNE5rVDFsZEZreQplTlVNYTJEV3VpMFRRN1VHU0c5RG9pZWI1aHRiS0VxajFXTnpXZVpXcHE3Ynl6dzZjUlFsaTF5Y2Ezcjc2REhYCklBS08wTEIrOUdiaC9qSkZrRlQ4dFROeE4rQmZtWFg3MkxGUEFvR0FmVzc0ZEthTUlBR2VQYmZ1Z0l6Q3BLZTcKRE9WSkYrV084ZUlPczZEQjEvdmNOSGNBeDVORDRXcVdoY1FRclF4OVQxdmZacjVFVzV1Y2lOK3RaMGM5SW9udgppWEtCa1RKUVFMTzdEVDd4azJ5b012dS9ZbmdXb2JYS0JpM0xLQ3RkcEIrTHRyVjRsclMreWhER3I5V0lnY29XCjN6b1NQWmVubDJ6ZzVDRWxFTnNDZ1lCc01NdWlXa0Q5Y3oyKzdWeHRiNnhoQlZLL1RjQXl0a0Y2Tm9QUkZKTHcKU3ZObzdMRWNwRjJrVk05ZGp2VVQzVUFUam05STI4VktyVHdsWXN1eEhaSmx0M2tabWJjMnVVaS9RcGhZNWh3YQp1ZnJhNnBwWFVWVzh0c3Z4M08xQW1Pcm9OMUFwNmptd2NjblJUb2NuWEthWERSb1NzcnQ2Tkl4SmxZYy9nRzVGCjdRS0JnSGtvVG5TeTVsSWRlYjE5Qk9qb3QrWU9JNGxONzlqRjFrSG9iZ2VvRTA3aTNpL0pqZDNvYWYzb2hxRzYKRkRHbUlISHA2ZEN4WUFqSENUd3htUXRvMWloUXhtVkpTd1pQRWRwSm5hcXd6U28wajhZWU9aUktpaHlOQmJKVQpqdWcydlQ1djE3b1NNUGQzcmlKUHprNEdUaTRTOFJCVlMzcWxGalhBVndCVFJPYTYKLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K
+        client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM5RENDQWR5Z0F3SUJBZ0lJS1I1d2ZMWUNRMm93RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TURBMU1USXdNRFUwTlRSYUZ3MHlNVEExTVRjd05qVTRORFZhTURZeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sc3dHUVlEVlFRREV4SmtiMk5yWlhJdFptOXlMV1JsCmMydDBiM0F3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ3hFa3dMYS9TVHcwaUIKZnBtY0VvU1Y1My85QUVzb1RxZzAwN3VwY0ZoU0FOeUh6QnNGV0xyTEhmYzd0aHZGKzYwY2I2RUZDbzJ5ZkhKLwovQzhmQ2RkMHFxMmkwdjd6SzBHbEs2S1RNWFdvZHlWOHpUZG5MN0s2bmJXK0IzQXdicTFXeDljN0VwaHZ4YkVqClBhZDcyYWRFZkRNcnF2a2UyYkw0OHFqN1UrR01zeXNhUEtaTnJCcHJVTTcrd2I2a3V0eE5GKzFYdEpQMUEwYjEKRzJCdXVhR0pJNzVTWnZORWZKSWZ4c1ZuVGN5U1hUbG5xU0pEZE93QVFZKzZzc3JPVDNNRTg0SFMvRWpqNGsxdAphMS85b3dlZTRSL3h2OXI1akFRbjdKWU5mRzdiMWZHOGhZNVg5OXR6azNQSzJnS1c1QjVyMzNsNEJTa2VpNlF5Cmt3Ymo1blVKQWdNQkFBR2pKekFsTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUYKQlFjREFqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFmbjRCWmowazAvbHpmeVJ0Rk5QSmo0RGFpeWxtdjlHYQpvN1ZTeGVtb0RDUGJOMDRTRGY4TFFJYTNXSmJSVjQxdVYxeWFrTjhaeUFtckQyK1RVUHQ1WkxTSmo1N24yVzdTClpSV3BkcitvaDV0RkZPSEJ1eS9zVU9kSFZ5MFFiWE9hZVl3QUFTc0xmVytRcVhEeGFQeXhKWGdrSzVpZ3ZwUC8KNWRRTndMUFdMejl5Zks3QzZlT3hIUG0yM0lNQkVhanZiWWpudlJYZFNOV0FTUkYrc3lNeERDTFAvRmttcVRPNQpHdFI2SzZaNmx4eFQ1QUxKSVFBcTJBaVNXUVpQdEhaRFplckpTVGVrcUNXYkRJZVFPcS96YnZrM2xPakg0MzFxCmY4WDczaWhFMXRaVElSZElSaFVxMkZVcXJoRHROWTh5WjNJN1JvTGVWZEQyWjdSZmNDVlFtUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+        client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBc1JKTUMydjBrOE5JZ1g2Wm5CS0VsZWQvL1FCTEtFNm9OTk83cVhCWVVnRGNoOHdiCkJWaTZ5eDMzTzdZYnhmdXRIRytoQlFxTnNueHlmL3d2SHduWGRLcXRvdEwrOHl0QnBTdWlrekYxcUhjbGZNMDMKWnkreXVwMjF2Z2R3TUc2dFZzZlhPeEtZYjhXeEl6Mm5lOW1uUkh3eks2cjVIdG15K1BLbysxUGhqTE1yR2p5bQpUYXdhYTFETy9zRytwTHJjVFJmdFY3U1Q5UU5HOVJ0Z2JybWhpU08rVW1ielJIeVNIOGJGWjAzTWtsMDVaNmtpClEzVHNBRUdQdXJMS3prOXpCUE9CMHZ4STQrSk5iV3RmL2FNSG51RWY4Yi9hK1l3RUoreVdEWHh1MjlYeHZJV08KVi9mYmM1Tnp5dG9DbHVRZWE5OTVlQVVwSG91a01wTUc0K1oxQ1FJREFRQUJBb0lCQUhCc2w0K2c2Vlp2NUxjagpORkJkaVlUTHlQMVBsR2h4R0djQ0QrSlNqQ0QwbnhBeFRPNm1HV01oRVhuOTg4Qk9QT2tURHY3dVptenVpcHdyCjk1Y1RYcEthVTBoUUFzTk5zWTQzR0Mrd2RXMlN5R0JtdzBobWhtbnAvQnc5Q01RWFlVTDUrdk5zcVJBK1NtdC8KbDdrUXhoeTdacG5SSWY2dVplMmQxQ0JPYjZRdWh4amsvci9YK29HQlo2cExMbHlWcjBUTTRCNzd3cWJ1cC9OVApPTkpXczVzRE1zSlRJRGxNcSt1emNIN0pLbUNQeEIvOW5lc0ZqY1JQd1FLR0hjLzlpVkh0YXIyQmdoSmNGalpOCmlrS005UjNldFdQY1FSRUxqTUtuZnUrNjduTDl6VmszVHNTTlNhMmJybGo1cXcrQm5Rc3F6U2JoUklUOU1mVVEKRnBJKzZDa0NnWUVBekgzb2lQeVJiMDJRbXB0am1RSm8zR2tBbkxmeHRjVHpDcXNDdkh4MGhMMkF3T0lKb3hwQwpoamFZMllvSVZtekZnM2dEaU51MWpIbG9JQStiSGpMLy95Ry9pRys4bTdORUdDZWNLd2h2ZG9PV1p5Lzh2ZWViCm1sbUJxVVFLeVJucEZDTFlrRGR4QzZ2OXVydGptaUNtNkF0VjZwQUlBSHBLYUs2L1JvMjMydk1DZ1lFQTNheEQKUEErcHdnNHZsSFA4ZXZUZlczVzNldUVmNnljVjBRRXIwcFdCN0Q0anZGL2FMWjk1R2N6MHpUTVdMZmdOU2w2Zgo5dGZ1M1ZUSXlzVllCcVBIcjcyMHVnL1ZXcG55RDdRMWdVVnU0TEJFTVVRVmMzMlR2MTlIbk9XaWlIa0VwZ25FCmtaTlhmSGlYcDY2Y28zNGxtOG0wOUg3OWNnbXNGTHFWTzdPdE54TUNnWUVBbVpkWU9NdTdVS1lwbm5abjhGem0KOWVYSUYrM3hGbDIvVHB2emlpN1FOWU5BV1o5dExaeGpxdnNIQXgyeDlYZnRRam02TGVrWUMxS0U2cy9ONm5qVAozb1V5bnYrTjRrUmJPT2xIV3VzVERTajRwcmhjVlNiSXNMM1pyWkQxcU9aVk1sS1o1bmc5NkU1ZVhRcXlYT2w1CmM0QlFIOFhldkwwZGRsTUtSNnZhRkJFQ2dZRUEyN0tVUEYybHVNK0lkcEJ4eG9jVks3ZENyc1dhZGR3WjhqZy8KNzRqLzZGMDUyOFFBSDhGeks1QUhlNnhMS2lvek9lY0lrWVEzbUNNa2tscitRQzVvaFpQMkg0WDd4YnpYdkpxMQpnTGFKQ3FXSUlHL0M5dUNaNDB5U1ZEei9WbFRpdDVEc3dmOE84UzB2MlIvazNPRDBjeTk1YWV6R1VoU2wrVEZuCklIR1dsZ01DZ1lCb244SFppNGNUYVJrRTVySHlHU3ZqVkhzeUhZZzhMSWZVbDdUYk5laDFkb0YrUHdxL0pGdEgKVW85NzVFSWVJblZ0dWxLcjNEL01yM25scmc3M1U3SC8xV1YrTnBWcWV3TWZJelBIVzUzekt1NWkyWG96RGxLbwpGb1lsak5EVlBXTk9RNi9mN05ubDNKd2ZlblR4U011c0N4a3JVcU9oeU5rMUV1Vm9wNDZVT1E9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+    - name: luweb@foxmail.com/cf1b8d269da816c6bf803b6591761eca
+      user:
+        auth-provider:
+          config:
+            client-id: kube
+            client-secret: kube
+            id-token: eyJraWQiOiIyMDIwMDQyNTE4MjkiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC0yNzAwMDM3NTdZIiwiaXNzIjoiaHR0cHM6Ly9pYW0uYmx1ZW1peC5uZXQvaWRlbnRpdHkiLCJzdWIiOiJsdXdlYkBmb3htYWlsLmNvbSIsImF1ZCI6Imt1YmUiLCJnaXZlbl9uYW1lIjoi5Lyf5b2sIiwiZmFtaWx5X25hbWUiOiLnvZciLCJuYW1lIjoi5Lyf5b2sIOe9lyIsImVtYWlsIjoibHV3ZWJAZm94bWFpbC5jb20iLCJleHAiOjE1ODk3MDI2ODcsInNjb3BlIjoiaWJtIG9wZW5pZCBjb250YWluZXJzLWt1YmVybmV0ZXMiLCJpYXQiOjE1ODk2OTkwODcsInN1Yl9jZjFiOGQyNjlkYTgxNmM2YmY4MDNiNjU5MTc2MWVjYSI6Imx1d2ViQGZveG1haWwuY29tIiwiaWFtX2lkX2NmMWI4ZDI2OWRhODE2YzZiZjgwM2I2NTkxNzYxZWNhIjoiSUJNaWQtMjcwMDAzNzU3WSIsInJlYWxtZWRfc3ViX2NmMWI4ZDI2OWRhODE2YzZiZjgwM2I2NTkxNzYxZWNhIjoiSUJNaWQtbHV3ZWJAZm94bWFpbC5jb20iLCJncm91cHNfY2YxYjhkMjY5ZGE4MTZjNmJmODAzYjY1OTE3NjFlY2EiOltdfQ.ckI1R1LzQPMIXpqDWlZc6ZoiL9xdNuQwHCgwslWJ-iHpwRF6sjCPThDeMjx6zKYFS6ZJrKDLqAymPKuTJq5yBY6IK7bRPDTzgvYg5FMhC9x0SbwpkmXTx9OGn_G7CBSX96z_C82GyD9JLrNbeL2Me2ins_v_nWlMzePCSb8I8hw-lTuvFuHNVgC18DlPCtHfdn7uWz6FfqHASewJ7z9jus5sJfNnTWe5dATijxSEvUEZmzovR7EPEBdEyrl3FCPD-ajhRhRuYdK1CBCMtl17EpI7l-xdsl_yjBSMECj_i3vYwHAKWhXdtZo88083HG73q3ndD5_saTb0RimFafEbww
+            idp-issuer-url: https://iam.bluemix.net/identity
+            refresh-token: OKAxSQC3ue2e-g8SG770DR_JLBfhjTpqjMIXcRa6YeJ7iyvmyx2o0rCeeuFNvGh7neOgHLAaFgPeVr76rZmtgDwXIGQHxodecVuqBQGfhgmpiLyJ4FtRfgg5QxurlRTks5WYiBP9L-55W5sxAFdoSkGFGfRPgJYw1tmovIoypvpF9i-AKBTppKVQgBEQZAZ6VCLOXWVuwXAoFvLNA0FNzGLFQwF4W72nqVXgd-ZoWhDFQXwaa1BqkZe2OqJq-xKVgy_NW_xrVMn225OhejeGZUuXpyXu_Hsc0_Dc_QBtoYReo6ZKIg5gp59lcGxP3WD25E5P037kpaIAc4VerVpb4W8LYk0MD7IE9hTsVXSwZBYoqyOW4UM0xsY5fxwHQgtKrGo69T2tGeHI8TZZ2Symni2ZnjnXkUF5rcv00arLsP8QvU9nDO_2Je7FxbTaDY41fw2homk_Pz5WACSaU4-CDp-QpWDuNMYYlGmZfp97eEbyPEOBfFuFtpHeQT2WnzazV59uBoePu-IBweCAWwOBc2us0KC9yfr6nmKr7hzFOsvuF63-b7Q5RplkW52uGhBtEUKYsHnvW0w8shci3Enb5HIfJEeI-rRH941xpstdBNK9hijKMcUUHStSicE3AjEOUbtHxFtK1Gw9bdAGBk2nYlaRv-kyC8hBqrz2qCyDgon7BVzV7beQ5LJu_umoUGn5NGhoaeRKEBh9D150apBkMXaGN3G70eXZsg1Mnj_N4RgRYxQXnI4JhV0Mbs92_KKTg3OiByKUA0d9XAgILwmwMvJvdFbh7TSGsiBFnTF3Jq9STBgWqR9wJHT8qhcNANDZqy36gKxV1bC69S4X56BdoFG5TtvpCfROjVNdhOdh-orprlXS-Insv07Rc1JktvL6D9xXlUlQvvIzmVSJEB8dEc6u-A6pgZkGHDWjZVaDk1zfdQBiAIX8ca_s7Scp_9ab2fkb71_5l3bPwwthCtaKZ4Gqsfj2Z9G1xzwIAk_fTque0xoujsf0SJgKS-Mb-262ZOw
+          name: oidc
+  ca-hou02-mycluster.pem: |-
+    -----BEGIN CERTIFICATE-----
+    MIIFOzCCAyOgAwIBAgIUV0xh89ParPNmn3EN5HnALA3ztyMwDQYJKoZIhvcNAQEL
+    BQAwLTErMCkGA1UEAwwiYnFydmk0YmQwMXJuNWttYzBmbGcta3ViZXJuZXRlcy1j
+    YTAeFw0yMDA1MTAxMjUzNTJaFw00NzA5MjYxMjUzNTJaMC0xKzApBgNVBAMMImJx
+    cnZpNGJkMDFybjVrbWMwZmxnLWt1YmVybmV0ZXMtY2EwggIiMA0GCSqGSIb3DQEB
+    AQUAA4ICDwAwggIKAoICAQD1kk3a08J5zOO+55WUTbmuJyki4WytHJJEFkH2zrrr
+    NNoyHwP67YmlS6XXCNIzYGQFdzKAm2awfivc3QawHCwxKoCodrCSdJWZv+wrzOcm
+    J6clIaNZIeiYM4Sgqt4GIrqUdFrt6IVZ8xKGsEmpma9Sdo7kRrVr4Abt9QnnAiex
+    uYFkk/DNVLs/5cXcwxsjWlqONMOPLr87EOsV7NssKwlMzPk27yPaRoWoYFfi5zof
+    cjoi2dKqYv27yAsTzrp5o5r2cp/LjwO4eLoiFDVJikfrv35fGiIiRf3qRbW/mkRd
+    UaEZwXGhpzk1A5roQclDQ7O9xRPF6kRyzlsbVWJQbgV6BT1n41KjashASb9oQHlw
+    U+RzVyv1v4A4EXi4Ml/nocdCEztuuYheC86xMoEMHcnlaqvQJ0qANx5PScK1Ah0x
+    kNIB730IiPvBRcaMVFJqPHfnpyZUm5aedceqmKdIC+Tp13RX7IaNM2qmXYcIR6Xi
+    xQj3HU9qcVqnHkZc0cUiAkTq3zFuzfbXVxDIPen1YitEEs9VQahhkncoK+Tuz68B
+    CUS8n27JqpB/+hxHj6uaqFa8mcBjcpdaVX1VJnaM0f0WqVdrTlaU1YcynLp8GRSF
+    QUhQ4a4dM5c2Mu6HCK3gpvAjn5niUB7GF2ICHXGDDW1x9f9MuDG1Q/OkChMI9f9s
+    TwIDAQABo1MwUTAdBgNVHQ4EFgQU9affVxYXK2/l2BvbvtGXfSK6s5UwHwYDVR0j
+    BBgwFoAU9affVxYXK2/l2BvbvtGXfSK6s5UwDwYDVR0TAQH/BAUwAwEB/zANBgkq
+    hkiG9w0BAQsFAAOCAgEAMFxqsvHNyIORdWgjf0y/hqCDE5YKc3NyCuXSt0xIVzeb
+    gKcq46DBO2TdJQ/zcFSJRpc8qVAVyIfelj2drQojfcvevVQx59pvIicP7vnYa/iA
+    0p9AU7/o1WY5VOfDoJmnpZeDolC6qHVrGIPGltrLiXA4by6oXj6rsoqOtjww8CUo
+    BO9bLZPZ1yggbtz9WXbYu1S78g07L9UVS3jcEidA8cJ8L1aZAnalFIk259PUwZrm
+    UaIWrDKImaN5lrg7GBQz/1xcRoxwOHTVmDMUNTYffoM1Uyl6h4qjvJ+cicWHpisw
+    vlPiVXv0AB+7i5mACn5sOTWzBFDfpPoknSPVDhCfMK3bULrfEiQdMVn7nTmAVL4/
+    HhMmscPviQm0kUM+LV8S67YZFiMfn6XwzVreVAJ03EsymfHvsJLg9zZiM/GVQ4Bw
+    0Inxhsg0sGyM3kufwRR/HvjKRki1MRNxfYGSCrx+ToFxZ/Z2inzhPEqfEPfFEcle
+    tp1AHz+qT4i+sjClbTo9DTQs+ZTbvq0+eoAYrDhbqi/FZi0rrGGpvnA94STtERlE
+    Et7X7GIgpkw88p7+O9lJGo/3wqoyIvF8kQGK+w1t4cBR+8Uup3CDbEjcjW52TGQt
+    y9KIhYUE5uPLLkRhnrELp2/fB8J/NOE3ocW7ZRJlohTAHCMUiCwr4/dHOGXAOSM=
+    -----END CERTIFICATE-----%
   feconfig.yaml: |-
     # fabric引擎端口
     BaasFabricEnginePort: 4991
     # baas 的根目录
-    BaasRootPath: /home/ubuntu/data/baas/
+    BaasRootPath: /data/baas/manager
     # nfs server ip
+    # BaasNfsServer: docker.for.mac.host.internal
     BaasNfsServer: 118.89.37.37
     # k8s引擎地址
     BaasKubeEngine: http://localhost:5991
@@ -142,8 +190,8 @@ spec:
         app.kubernetes.io/instance: 1.17.9
     spec:
       containers:
-        - name: baas-gateway
-          image: luoweb/baasmanager:2.0
+        - name: gateway
+          image: docker.io/luoweb/baasmanager:2.0
           imagePullPolicy: IfNotPresent
           command: ["/app/baas-gateway"]
           ports:
@@ -151,13 +199,13 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: baasmanager
-              mountPath: "/etc/baas/"
+              mountPath: "/app/gwconfig.yaml"
               subPath: gwconfig.yaml
             - name: baasmanager
-              mountPath: "/etc/baas/"
+              mountPath: "/etc/gateway/dbconfig.yaml"
               subPath: dbconfig.yaml
-        - name: baas-kubeengine
-          image: luoweb/baasmanager:2.0
+        - name: kubeengine
+          image: docker.io/luoweb/baasmanager:2.0
           imagePullPolicy: IfNotPresent
           command: ["/app/baas-kubeengine"]
           ports:
@@ -165,31 +213,36 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: baasmanager
-              mountPath: "/etc/baas/"
+              mountPath: "/app/keconfig.yaml"
               subPath: keconfig.yaml
             - name: baasmanager
-              mountPath: "/etc/baas/"
-              subPath: config
-        - name: baas-fabricengine
-          image: luoweb/baasmanager:2.0
+              mountPath: "/etc/k8sconfig/config"
+              subPath: k8sconfig
+            - name: baasmanager
+              mountPath: "/etc/k8sconfig/ca-hou02-mycluster.pem"
+              subPath: ca-hou02-mycluster.pem
+        - name: fabricengine
+          image: docker.io/luoweb/baasmanager:2.0
           imagePullPolicy: IfNotPresent
-          command: ["baas-fabricengine"]
+          command: ["/app/baas-fabricengine"]
           ports:
             - containerPort: 4991
               protocol: TCP
           volumeMounts:
             - name: baasmanager
-              mountPath: "/etc/baas/"
-              ubPath: feconfig.yaml
+              mountPath: "/app/feconfig.yaml"
+              subPath: feconfig.yaml
+            - name: nfs-client-root
+              mountPath: "/data/baas/manager"
         - name: baas-frontend
-          image: luoweb/baasmanager:2.0
+          image: docker.io/luoweb/baasmanager:2.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4991
               protocol: TCP
           volumeMounts:
             - name: baasmanager
-              mountPath: "/etc/nginx/conf.d/"
+              mountPath: "/etc/nginx/conf.d/baas.conf"
               subPath: baas.conf
       volumes:
         - name: baasmanager
@@ -198,7 +251,11 @@ spec:
         - name: nfs-client-root
           nfs:
             server: 118.89.37.37
-            path: /home/ubuntu/data/baas/
+            path: /data/baas/manager
+          # nfs:
+          #   server: docker.for.mac.host.internal
+          #   # server: 192.168.3.31
+          #   path: /System/Volumes/Data/opt/data/k8s
 ---
 apiVersion: v1
 kind: Service
