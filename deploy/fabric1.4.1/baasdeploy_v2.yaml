@@ -1,0 +1,273 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: baasmanager
+  namespace: default
+  labels:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 2.0.0
+data:
+  baas.conf: |-
+    # baas-gateway地址
+    upstream baasapi {
+        server localhost:6991;
+    }
+    # HTTP server
+    server {
+        listen       8080;
+        server_name  baasadmin;
+
+        location /nginx_status {
+                stub_status on;
+                access_log off;
+        }
+        location /api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+        location /dev-api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+        location /stage-api/{
+            proxy_pass  http://baasapi/api/;
+            proxy_set_header  X-Real-IP  $remote_addr;
+            proxy_set_header Host $host;
+
+        }
+
+        location / {
+            root   /usr/share/nginx/baas;
+            index  index.html index.htm;
+        }
+
+        location ~ ^/favicon\.ico$ {
+            root   baas;
+        }
+            
+    }
+
+  gwconfig.yaml: |-
+    # gateway引擎端口
+    BaasGatewayPort: 6991
+    # fabric引擎地址
+    BaasFabricEngine: http://localhost:4991
+    # db配置
+    BaasGatewayDbconfig: /etc/gateway/dbconfig.yaml
+  dbconfig.yaml: |-
+    xorm:
+      drivename: mysql
+      ip: 10.2.1.205
+      port: 3306
+      database: baas_api
+      user: root
+      password: 123456
+      #是否显示sql语句
+      showsql: true
+      #连接池中idle态链接最大个数
+      maxidle: 10
+      #连接池最大打开连接数
+      maxopen: 5
+  keconfig.yaml: |-
+    # k8s引擎端口
+    BaasKubeEnginePort: 5991
+    # k8s集群master config
+    BaasKubeMasterConfig: /etc/k8sconfig/config
+  k8sconfig: |-
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJWekNCL3FBREFnRUNBZ0VBTUFvR0NDcUdTTTQ5QkFNQ01DTXhJVEFmQmdOVkJBTU1HR3N6Y3kxelpYSjIKWlhJdFkyRkFNVFU1TXpnNE16UTJPVEFlRncweU1EQTNNRFF4TnpJME1qbGFGdzB6TURBM01ESXhOekkwTWpsYQpNQ014SVRBZkJnTlZCQU1NR0dzemN5MXpaWEoyWlhJdFkyRkFNVFU1TXpnNE16UTJPVEJaTUJNR0J5cUdTTTQ5CkFnRUdDQ3FHU000OUF3RUhBMElBQkEzdXc0YjhuSkUwaTZEUjhSQlI5TC95QUZuN0VXMnNEQ2UyTUdwa2hsaGcKTmZ1OXhQWlU1K205USsvY1RqQ2k5UjZaNDBQa3FibWVOOHkrLzJIZ2EyK2pJekFoTUE0R0ExVWREd0VCL3dRRQpBd0lDcERBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUFvR0NDcUdTTTQ5QkFNQ0EwZ0FNRVVDSURvdnNlbnM0Z1h1Cmt5amlMc21wMzh5MkFaK1AydjRuem1qQitjamlTZnZnQWlFQW5jZVZsT0hIQURiMnlTL3RZMzJVVlZ2bTBxZzQKeGp2M2t5bno4UUpXeW9jPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        server: https://10.2.1.204:6443
+      name: default
+    contexts:
+    - context:
+        cluster: default
+        user: default
+      name: default
+    current-context: default
+    kind: Config
+    preferences: {}
+    users:
+    - name: default
+      user:
+        password: f0a3200cae76b89b99ce7acbf24d7a2e
+        username: admin
+  ca-hou02-mycluster.pem: |-
+    -----BEGIN CERTIFICATE-----
+    MIIFOzCCAyOgAwIBAgIUV0xh89ParPNmn3EN5HnALA3ztyMwDQYJKoZIhvcNAQEL
+    BQAwLTErMCkGA1UEAwwiYnFydmk0YmQwMXJuNWttYzBmbGcta3ViZXJuZXRlcy1j
+    YTAeFw0yMDA1MTAxMjUzNTJaFw00NzA5MjYxMjUzNTJaMC0xKzApBgNVBAMMImJx
+    cnZpNGJkMDFybjVrbWMwZmxnLWt1YmVybmV0ZXMtY2EwggIiMA0GCSqGSIb3DQEB
+    AQUAA4ICDwAwggIKAoICAQD1kk3a08J5zOO+55WUTbmuJyki4WytHJJEFkH2zrrr
+    NNoyHwP67YmlS6XXCNIzYGQFdzKAm2awfivc3QawHCwxKoCodrCSdJWZv+wrzOcm
+    J6clIaNZIeiYM4Sgqt4GIrqUdFrt6IVZ8xKGsEmpma9Sdo7kRrVr4Abt9QnnAiex
+    uYFkk/DNVLs/5cXcwxsjWlqONMOPLr87EOsV7NssKwlMzPk27yPaRoWoYFfi5zof
+    cjoi2dKqYv27yAsTzrp5o5r2cp/LjwO4eLoiFDVJikfrv35fGiIiRf3qRbW/mkRd
+    UaEZwXGhpzk1A5roQclDQ7O9xRPF6kRyzlsbVWJQbgV6BT1n41KjashASb9oQHlw
+    U+RzVyv1v4A4EXi4Ml/nocdCEztuuYheC86xMoEMHcnlaqvQJ0qANx5PScK1Ah0x
+    kNIB730IiPvBRcaMVFJqPHfnpyZUm5aedceqmKdIC+Tp13RX7IaNM2qmXYcIR6Xi
+    xQj3HU9qcVqnHkZc0cUiAkTq3zFuzfbXVxDIPen1YitEEs9VQahhkncoK+Tuz68B
+    CUS8n27JqpB/+hxHj6uaqFa8mcBjcpdaVX1VJnaM0f0WqVdrTlaU1YcynLp8GRSF
+    QUhQ4a4dM5c2Mu6HCK3gpvAjn5niUB7GF2ICHXGDDW1x9f9MuDG1Q/OkChMI9f9s
+    TwIDAQABo1MwUTAdBgNVHQ4EFgQU9affVxYXK2/l2BvbvtGXfSK6s5UwHwYDVR0j
+    BBgwFoAU9affVxYXK2/l2BvbvtGXfSK6s5UwDwYDVR0TAQH/BAUwAwEB/zANBgkq
+    hkiG9w0BAQsFAAOCAgEAMFxqsvHNyIORdWgjf0y/hqCDE5YKc3NyCuXSt0xIVzeb
+    gKcq46DBO2TdJQ/zcFSJRpc8qVAVyIfelj2drQojfcvevVQx59pvIicP7vnYa/iA
+    0p9AU7/o1WY5VOfDoJmnpZeDolC6qHVrGIPGltrLiXA4by6oXj6rsoqOtjww8CUo
+    BO9bLZPZ1yggbtz9WXbYu1S78g07L9UVS3jcEidA8cJ8L1aZAnalFIk259PUwZrm
+    UaIWrDKImaN5lrg7GBQz/1xcRoxwOHTVmDMUNTYffoM1Uyl6h4qjvJ+cicWHpisw
+    vlPiVXv0AB+7i5mACn5sOTWzBFDfpPoknSPVDhCfMK3bULrfEiQdMVn7nTmAVL4/
+    HhMmscPviQm0kUM+LV8S67YZFiMfn6XwzVreVAJ03EsymfHvsJLg9zZiM/GVQ4Bw
+    0Inxhsg0sGyM3kufwRR/HvjKRki1MRNxfYGSCrx+ToFxZ/Z2inzhPEqfEPfFEcle
+    tp1AHz+qT4i+sjClbTo9DTQs+ZTbvq0+eoAYrDhbqi/FZi0rrGGpvnA94STtERlE
+    Et7X7GIgpkw88p7+O9lJGo/3wqoyIvF8kQGK+w1t4cBR+8Uup3CDbEjcjW52TGQt
+    y9KIhYUE5uPLLkRhnrELp2/fB8J/NOE3ocW7ZRJlohTAHCMUiCwr4/dHOGXAOSM=
+    -----END CERTIFICATE-----%
+  feconfig.yaml: |-
+    # fabric引擎端口
+    BaasFabricEnginePort: 4991
+    # baas 的根目录
+    BaasRootPath: /data/baas/manager
+    # nfs server ip
+    # BaasNfsServer: docker.for.mac.host.internal
+    BaasNfsServer: 10.2.1.204
+    # k8s引擎地址
+    BaasKubeEngine: http://localhost:5991
+    # 在baas根目录下nfs共享目录
+    BaasNfsShared: baas-nfsshared
+    # 在baas根目录下fabric k8s模板目录
+    BaasTemplate: baas-template
+    # 保存chaincode的gopath下的src目录
+    BaasChaincodeGithub: github.com/baaschaincodes
+    # 共识排序参数
+    OrdererBatchTimeout: 1s
+    OrdererMaxMessageCount: 10
+    OrdererAbsoluteMaxBytes: 99 MB
+    OrdererPreferredMaxBytes: 512 KB
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baasmanager
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: baasmanager
+      app.kubernetes.io/instance: 2.0.0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: baasmanager
+        app.kubernetes.io/instance: 2.0.0
+    spec:
+      containers:
+        - name: gateway
+          image: docker.io/luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["/app/baas-gateway"]
+          ports:
+            - containerPort: 6991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/app/gwconfig.yaml"
+              subPath: gwconfig.yaml
+            - name: baasmanager
+              mountPath: "/etc/gateway/dbconfig.yaml"
+              subPath: dbconfig.yaml
+        - name: kubeengine
+          image: docker.io/luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["/app/baas-kubeengine"]
+          ports:
+            - containerPort: 5991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/app/keconfig.yaml"
+              subPath: keconfig.yaml
+            - name: baasmanager
+              mountPath: "/etc/k8sconfig/config"
+              subPath: k8sconfig
+            - name: baasmanager
+              mountPath: "/etc/k8sconfig/ca-hou02-mycluster.pem"
+              subPath: ca-hou02-mycluster.pem
+        - name: fabricengine
+          image: docker.io/luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          command: ["/app/baas-fabricengine"]
+          env:
+            - name: GOPATH
+              value: "/data/baas/manager/gopath"
+          ports:
+            - containerPort: 4991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/app/feconfig.yaml"
+              subPath: feconfig.yaml
+            - name: nfs-client-root
+              mountPath: "/data/baas/manager"
+        - name: baas-frontend
+          image: docker.io/luoweb/baasmanager:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4991
+              protocol: TCP
+          volumeMounts:
+            - name: baasmanager
+              mountPath: "/etc/nginx/conf.d/baas.conf"
+              subPath: baas.conf
+      volumes:
+        - name: baasmanager
+          configMap:
+            name: baasmanager
+        - name: nfs-client-root
+          nfs:
+            server: 10.2.1.204
+            path: /data/baas/manager
+          # nfs:
+          #   server: docker.for.mac.host.internal
+          #   # server: 192.168.3.31
+          #   path: /System/Volumes/Data/opt/data/k8s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baasmanager
+  namespace: default
+  labels:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 2.0.0
+spec:
+  type: NodePort
+  ports:
+    - name: http-port
+      port: 8080
+      targetPort: 8080
+      nodePort: 32600
+    - name: gateway-port
+      port: 6991
+      targetPort: 6991
+      nodePort: 32601
+    - name: kubeengine-port
+      port: 5991
+      targetPort: 5991
+      nodePort: 32602
+    - name: fabricengine-port
+      port: 4991
+      targetPort: 4991
+      nodePort: 32603
+  selector:
+    app.kubernetes.io/name: baasmanager
+    app.kubernetes.io/instance: 2.0.0
+

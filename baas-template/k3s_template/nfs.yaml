@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{namespace}}-pv
+  labels:
+    app: {{namespace}}-pv
+spec:
+  # storageClassName: manual
+  capacity:
+    storage: 10Mi
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+  nfs:
+    path: {{nfs-artifact-path}}
+    server: {{nfs-server}}
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: {{namespace}}-pv
+    namespace: {{namespace}}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ namespace: {{namespace}}
+ name: {{namespace}}-pv
+spec:
+ volumeName: {{namespace}}-pv
+ # storageClassName: manual
+ accessModes:
+   # - ReadWriteMany
+   - ReadWriteOnce
+ # storageClassName: longhorn
+ # storageClassName: local-path
+ resources:
+   requests:
+     storage: 10Mi
+ selector:
+   matchLabels:
+     app: {{namespace}}-pv
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{namespace}}-pvdata
+  labels:
+    app: {{namespace}}-pvdata
+spec:
+  #storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+    # - ReadWriteOnce
+  nfs:
+    path: {{nfs-fabric-data-path}}
+    server: {{nfs-server}}
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: {{namespace}}-pvdata
+    namespace: {{namespace}}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ namespace: {{namespace}}
+ name: {{namespace}}-pvdata
+spec:
+ volumeName: {{namespace}}-pvdata
+ accessModes:
+   # - ReadWriteMany
+   - ReadWriteOnce
+ #storageClassName: local-path
+ # storageClassName: manual
+ resources:
+   requests:
+     storage: 10Gi
+ selector:
+   matchLabels:
+     app: {{namespace}}-pvdata
+

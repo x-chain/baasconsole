@@ -1,0 +1,1 @@
+FROM hyperledger/fabric-tools:1.4.1 as golang

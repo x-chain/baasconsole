@@ -96,6 +96,7 @@ go run main.go
     - vim /etc/exports (添加配置,相应修改)
       ```
       /baas根目录/baas-nfsshared 192.168.1.0/24(rw,sync,insecure,anonuid=当前用户的uid,anongid=当前用户的gid)
+      /data/baas/manager 10.2.1.0/24(rw,sync,insecure,anonuid=0,anongid=0)
       ```
     - exportfs -r (配置生效)
     - service rpcbind start && service nfs start (启动 rpcbind、nfs 服务)

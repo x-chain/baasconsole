@@ -213,3 +213,4 @@ go run main.go
   * 访问 http://ip:8080 
 
 
+tar -cvzf baas_depend.tar.gz baasdeploy*.yaml scripts *.md baas-nfsshared baas-template
