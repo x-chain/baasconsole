@@ -1,13 +1,13 @@
 package fautil
 
 import (
-	"strings"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"path/filepath"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-fabricengine/config"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
 	"os"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/config"
+	"path/filepath"
+	"strings"
 )
 
 func GetNamesapces(f model.FabricChain) string {
@@ -40,7 +40,7 @@ func GetAnchorsTxs(f model.FabricChain, artifactPath string) []string {
 }
 
 func GetChaincodeGithub(f model.FabricChannel) string {
-	return filepath.Join(config.Config.GetString("BaasChaincodeGithub"), f.Account, f.ChainName,f.ChannelName, f.ChaincodeId, f.Version)
+	return filepath.Join(config.Config.GetString("BaasChaincodeGithub"), f.Account, f.ChainName, f.ChannelName, f.ChaincodeId, f.Version)
 }
 
 func GetChaincodeLocalGithub(f model.FabricChannel) string {

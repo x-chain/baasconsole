@@ -2,8 +2,8 @@ package gintool
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"time"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 )
 
 func Logger() gin.HandlerFunc {

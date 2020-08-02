@@ -1,14 +1,14 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
-	"strconv"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
 	"net/http"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
+	"strconv"
 	"time"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
 )
 
 func (a *ApiController) ChainAdd(ctx *gin.Context) {
@@ -208,7 +208,6 @@ func (a *ApiController) ChainDownload(ctx *gin.Context) {
 	ctx.DataFromReader(http.StatusOK, contentLength, "application/x-tar", reader, extraHeaders)
 
 }
-
 
 func (a *ApiController) ChainPodsQuery(ctx *gin.Context) {
 

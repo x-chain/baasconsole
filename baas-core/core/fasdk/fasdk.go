@@ -1,21 +1,21 @@
 package fasdk
 
 import (
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
-	mspclient "github.com/hyperledger/fabric-sdk-go/pkg/client/msp"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/msp"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fab/ccpackager/gopackager"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/ledger"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 	"fmt"
-	"time"
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/ledger"
+	mspclient "github.com/hyperledger/fabric-sdk-go/pkg/client/msp"
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
+	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
+	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
+	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/msp"
+	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fab/ccpackager/gopackager"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"os"
+	"time"
 )
 
 var logger = log.GetLogger("fasdk", log.ERROR)
@@ -39,8 +39,6 @@ type FabricClient struct {
 	retry          resmgmt.RequestOption
 	orderer        resmgmt.RequestOption
 }
-
-
 
 func (f *FabricClient) Setup() error {
 	sdk, err := fabsdk.New(config.FromRaw(f.ConnectionFile, "yaml"))
@@ -230,7 +228,6 @@ func (f *FabricClient) QueryLedger() (*fab.BlockchainInfoResponse, error) {
 	return bci, nil
 }
 
-
 func (f *FabricClient) QueryBlock(height uint64) (*FabricBlock, error) {
 
 	ledger, err := ledger.New(f.sdk.ChannelContext(f.ChannelId, fabsdk.WithUser(f.UserName), fabsdk.WithOrg(f.Orgs[0])))
@@ -364,8 +361,6 @@ func (f *FabricClient) InvokeChaincode(chaincodeId, fcn string, args [][]byte) (
 	return []byte(resp.TransactionID), nil
 }
 
-
-
 func NewFabricClient(connectionFile []byte, channelId string, orgs []string, orderer string) *FabricClient {
 	fabric := &FabricClient{
 		ConnectionFile: connectionFile,
@@ -380,6 +375,3 @@ func NewFabricClient(connectionFile []byte, channelId string, orgs []string, ord
 	return fabric
 
 }
-
-
-

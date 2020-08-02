@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/jonluo94/baasmanager/baas-core/common/xorm"
-	"github.com/jonluo94/baasmanager/baas-gateway/config"
-	"github.com/jonluo94/baasmanager/baas-gateway/service"
-	"github.com/jonluo94/baasmanager/baas-gateway/controller"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/xorm"
+	"github.com/x-chain/baasconsole/baas-gateway/config"
+	"github.com/x-chain/baasconsole/baas-gateway/controller"
+	"github.com/x-chain/baasconsole/baas-gateway/service"
 )
 
 func main() {

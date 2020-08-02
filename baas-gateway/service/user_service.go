@@ -1,14 +1,14 @@
 package service
 
 import (
-	"github.com/go-xorm/xorm"
-	"time"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/password"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	jwttool "github.com/jonluo94/baasmanager/baas-core/common/jwt"
+	"github.com/go-xorm/xorm"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	jwttool "github.com/x-chain/baasconsole/baas-core/common/jwt"
+	"github.com/x-chain/baasconsole/baas-core/common/password"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
+	"time"
 )
 
 const TokenKey = "baas user secret"
@@ -123,7 +123,7 @@ func (l *UserService) GetList(user *entity.User, page, size int) (bool, []entity
 	return true, userDatas, total
 }
 
-func (l *UserService) GetToken(user *entity.User) (*entity.JwtToken) {
+func (l *UserService) GetToken(user *entity.User) *entity.JwtToken {
 
 	info := make(map[string]interface{})
 	now := time.Now()

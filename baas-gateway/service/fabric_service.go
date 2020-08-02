@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
-	"github.com/jonluo94/baasmanager/baas-core/common/httputil"
-	"github.com/jonluo94/baasmanager/baas-gateway/config"
+	"github.com/x-chain/baasconsole/baas-core/common/httputil"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-gateway/config"
 )
 
 var logger = log.GetLogger("service", log.ERROR)
@@ -69,7 +69,7 @@ func (g FabricService) QueryLatestBlocks(channel model.FabricChain) []byte {
 	return httputil.PostJson(config.Config.GetString("BaasFabricEngine")+"/queryLatestBlocks", channel)
 }
 
-func (g FabricService) QueryBlock(channel model.FabricChain,search string) []byte {
+func (g FabricService) QueryBlock(channel model.FabricChain, search string) []byte {
 	return httputil.PostJson(config.Config.GetString("BaasFabricEngine")+"/queryBlock?search="+search, channel)
 }
 

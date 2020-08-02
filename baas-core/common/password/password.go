@@ -2,7 +2,7 @@ package password
 
 import (
 	"github.com/alexandrevicenzi/unchained"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
 )
 
 var logger = log.GetLogger("password", log.ERROR)

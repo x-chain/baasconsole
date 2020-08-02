@@ -46,14 +46,14 @@ github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
 # github.com/imdario/mergo v0.3.5
 github.com/imdario/mergo
-# github.com/jonluo94/baasmanager/baas-core v0.0.0 => ../baas-core
-github.com/jonluo94/baasmanager/baas-core/common/log
-github.com/jonluo94/baasmanager/baas-core/common/json
-github.com/jonluo94/baasmanager/baas-core/common/queue
-github.com/jonluo94/baasmanager/baas-core/core/kubeclient
-github.com/jonluo94/baasmanager/baas-core/common/gintool
-github.com/jonluo94/baasmanager/baas-core/common/util
-github.com/jonluo94/baasmanager/baas-core/core/model
+# github.com/x-chain/baasconsole/baas-core v0.0.0 => ../baas-core
+github.com/x-chain/baasconsole/baas-core/common/log
+github.com/x-chain/baasconsole/baas-core/common/json
+github.com/x-chain/baasconsole/baas-core/common/queue
+github.com/x-chain/baasconsole/baas-core/core/kubeclient
+github.com/x-chain/baasconsole/baas-core/common/gintool
+github.com/x-chain/baasconsole/baas-core/common/util
+github.com/x-chain/baasconsole/baas-core/core/model
 # github.com/json-iterator/go v1.1.6
 github.com/json-iterator/go
 # github.com/magiconair/properties v1.8.0

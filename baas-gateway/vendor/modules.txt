@@ -44,15 +44,15 @@ github.com/hashicorp/hcl/hcl/scanner
 github.com/hashicorp/hcl/hcl/strconv
 github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
-# github.com/jonluo94/baasmanager/baas-core v0.0.0 => ../baas-core
-github.com/jonluo94/baasmanager/baas-core/common/gintool
-github.com/jonluo94/baasmanager/baas-core/common/xorm
-github.com/jonluo94/baasmanager/baas-core/common/log
-github.com/jonluo94/baasmanager/baas-core/common/password
-github.com/jonluo94/baasmanager/baas-core/core/model
-github.com/jonluo94/baasmanager/baas-core/common/httputil
-github.com/jonluo94/baasmanager/baas-core/common/json
-github.com/jonluo94/baasmanager/baas-core/common/jwt
+# github.com/x-chain/baasconsole/baas-core v0.0.0 => ../baas-core
+github.com/x-chain/baasconsole/baas-core/common/gintool
+github.com/x-chain/baasconsole/baas-core/common/xorm
+github.com/x-chain/baasconsole/baas-core/common/log
+github.com/x-chain/baasconsole/baas-core/common/password
+github.com/x-chain/baasconsole/baas-core/core/model
+github.com/x-chain/baasconsole/baas-core/common/httputil
+github.com/x-chain/baasconsole/baas-core/common/json
+github.com/x-chain/baasconsole/baas-core/common/jwt
 # github.com/json-iterator/go v1.1.6
 github.com/json-iterator/go
 # github.com/magiconair/properties v1.8.0

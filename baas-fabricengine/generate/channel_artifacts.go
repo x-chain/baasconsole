@@ -1,13 +1,13 @@
 package generate
 
 import (
-	"sync"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-core/core/tools"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
 	"path/filepath"
-	"github.com/jonluo94/baasmanager/baas-core/core/tools"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
+	"sync"
 )
 
 var logger = log.GetLogger("fabricengine.generate", log.INFO)

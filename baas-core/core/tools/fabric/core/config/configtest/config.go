@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/jonluo94/baasmanager/baas-core/core/tools/viper"
 	"github.com/stretchr/testify/assert"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/viper"
 )
 
 // AddDevConfigPath adds the DevConfigDir to the viper path.

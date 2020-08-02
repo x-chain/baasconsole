@@ -337,22 +337,22 @@ github.com/ijc/Gotty
 # github.com/jcmturner/gofork v0.0.0-20190328161633-dc7c13fece03
 github.com/jcmturner/gofork/encoding/asn1
 github.com/jcmturner/gofork/x/crypto/pbkdf2
-# github.com/jonluo94/baasmanager/baas-core v0.0.0 => ../baas-core
-github.com/jonluo94/baasmanager/baas-core/common/log
-github.com/jonluo94/baasmanager/baas-core/common/util
-github.com/jonluo94/baasmanager/baas-core/core/model
-github.com/jonluo94/baasmanager/baas-core/common/fileutil
-github.com/jonluo94/baasmanager/baas-core/core/fasdk
-github.com/jonluo94/baasmanager/baas-core/core/tools
-github.com/jonluo94/baasmanager/baas-core/common/gintool
-github.com/jonluo94/baasmanager/baas-core/common/httputil
-github.com/jonluo94/baasmanager/baas-core/common/json
-github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/encoder
-github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/localconfig
-github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/metadata
-github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/viperutil
-github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/core/config
-github.com/jonluo94/baasmanager/baas-core/core/tools/viper
+# github.com/x-chain/baasconsole/baas-core v0.0.0 => ../baas-core
+github.com/x-chain/baasconsole/baas-core/common/log
+github.com/x-chain/baasconsole/baas-core/common/util
+github.com/x-chain/baasconsole/baas-core/core/model
+github.com/x-chain/baasconsole/baas-core/common/fileutil
+github.com/x-chain/baasconsole/baas-core/core/fasdk
+github.com/x-chain/baasconsole/baas-core/core/tools
+github.com/x-chain/baasconsole/baas-core/common/gintool
+github.com/x-chain/baasconsole/baas-core/common/httputil
+github.com/x-chain/baasconsole/baas-core/common/json
+github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/encoder
+github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/localconfig
+github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/metadata
+github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/viperutil
+github.com/x-chain/baasconsole/baas-core/core/tools/fabric/core/config
+github.com/x-chain/baasconsole/baas-core/core/tools/viper
 # github.com/json-iterator/go v1.1.6
 github.com/json-iterator/go
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1

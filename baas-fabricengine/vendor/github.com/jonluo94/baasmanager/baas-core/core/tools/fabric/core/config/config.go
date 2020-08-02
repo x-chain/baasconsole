@@ -12,7 +12,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jonluo94/baasmanager/baas-core/core/tools/viper"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/viper"
 )
 
 func dirExists(path string) bool {

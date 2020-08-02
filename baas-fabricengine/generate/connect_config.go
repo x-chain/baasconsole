@@ -2,17 +2,17 @@ package generate
 
 import (
 	"bytes"
-	"strings"
+	"encoding/json"
 	"fmt"
-	"strconv"
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/fasdk"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
 	"io/ioutil"
 	"os"
-	"encoding/json"
 	"path/filepath"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
-	"github.com/jonluo94/baasmanager/baas-core/core/fasdk"
+	"strconv"
+	"strings"
 )
 
 var line = `
@@ -29,6 +29,7 @@ var (
 	channel      = fmt.Sprintf(constant.Tag, "channel")
 	user         = fmt.Sprintf(constant.Tag, "user")
 )
+
 //fasdk链接文件
 type ConnectConfig struct {
 	model.FabricChain

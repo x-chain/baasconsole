@@ -1,15 +1,15 @@
 package generate
 
 import (
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-fabricengine/config"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"strconv"
 	"os"
 	"path/filepath"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/config"
+	"strconv"
 )
 
 //builder
@@ -106,7 +106,7 @@ type Orderer struct {
 	OrdererType  string   `yaml:"OrdererType"`
 	Addresses    []string `yaml:"Addresses"`
 	BatchTimeout string   `yaml:"BatchTimeout"`
-	BatchSize struct {
+	BatchSize    struct {
 		MaxMessageCount   int    `yaml:"MaxMessageCount"`
 		AbsoluteMaxBytes  string `yaml:"AbsoluteMaxBytes"`
 		PreferredMaxBytes string `yaml:"PreferredMaxBytes"`
@@ -122,8 +122,8 @@ type Orderer struct {
 }
 
 type Consenter struct {
-	Host string `yaml:"Host"`
-	Port int `yaml:"Port"`
+	Host          string `yaml:"Host"`
+	Port          int    `yaml:"Port"`
 	ClientTLSCert string `yaml:"ClientTLSCert"`
 	ServerTLSCert string `yaml:"ServerTLSCert"`
 }
@@ -155,7 +155,7 @@ type OgOrderer struct {
 	OrdererType  string   `yaml:"OrdererType"`
 	Addresses    []string `yaml:"Addresses"`
 	BatchTimeout string   `yaml:"BatchTimeout"`
-	BatchSize struct {
+	BatchSize    struct {
 		MaxMessageCount   int    `yaml:"MaxMessageCount"`
 		AbsoluteMaxBytes  string `yaml:"AbsoluteMaxBytes"`
 		PreferredMaxBytes string `yaml:"PreferredMaxBytes"`
@@ -195,7 +195,7 @@ type CryptoConfig struct {
 type OrdererOrg struct {
 	Name   string `yaml:"Name"`
 	Domain string `yaml:"Domain"`
-	CA struct {
+	CA     struct {
 		Country  string `yaml:"Country"`
 		Province string `yaml:"Province"`
 		Locality string `yaml:"Locality"`
@@ -229,7 +229,7 @@ func NewOrdererOrg(domain string, ordererCount int) OrdererOrg {
 type PeerOrg struct {
 	Name   string `yaml:"Name"`
 	Domain string `yaml:"Domain"`
-	CA struct {
+	CA     struct {
 		Country  string `yaml:"Country"`
 		Province string `yaml:"Province"`
 		Locality string `yaml:"Locality"`
@@ -435,10 +435,10 @@ func (f FabricConfig) SetOrderer() FabricConfig {
 			domains[i] = domain + ":7050"
 			tls := f.CryptoConfigDir + "/ordererOrganizations/" + f.GetHostDomain(constant.OrdererSuffix) + "/orderers/" + domain + "/tls/server.crt"
 			consenter := Consenter{
-				Host:domain,
-                Port: 7050,
-                ClientTLSCert:tls,
-                ServerTLSCert:tls,
+				Host:          domain,
+				Port:          7050,
+				ClientTLSCert: tls,
+				ServerTLSCert: tls,
 			}
 			consenters[i] = consenter
 		}
@@ -446,7 +446,7 @@ func (f FabricConfig) SetOrderer() FabricConfig {
 		orderer.EtcdRaft = struct {
 			Consenters []Consenter `yaml:"Consenters"`
 		}{
-			Consenters:consenters,
+			Consenters: consenters,
 		}
 	}
 	f.configtx.Orderer = orderer
@@ -549,7 +549,7 @@ func (f FabricConfig) SetOrdererOrgs() FabricConfig {
 	switch f.Consensus {
 	case constant.OrdererSolo:
 		order = NewOrdererOrg(f.GetHostDomain(constant.OrdererSuffix), 1)
-	case constant.OrdererKafka,constant.OrdererEtcdraft:
+	case constant.OrdererKafka, constant.OrdererEtcdraft:
 		order = NewOrdererOrg(f.GetHostDomain(constant.OrdererSuffix), f.OrderCount)
 	}
 	ordererOrgs[0] = order

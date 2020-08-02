@@ -1,20 +1,20 @@
 package service
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	corev1 "k8s.io/api/core/v1"
+	"github.com/gin-gonic/gin"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/kubeclient"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-kubeengine/config"
+	"github.com/x-chain/baasconsole/baas-kubeengine/engine"
 	appsv1 "k8s.io/api/apps/v1"
-	"strings"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-kubeengine/engine"
-	"github.com/jonluo94/baasmanager/baas-core/core/kubeclient"
-	"github.com/jonluo94/baasmanager/baas-kubeengine/config"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"strconv"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
+	"strings"
 )
 
 const PortName = "endpoint"
@@ -127,17 +127,17 @@ func (k *KubeService) ChangeDeployResources(ctx *gin.Context) {
 	node := resources.Node
 	index := strings.Index(node, ".")
 	deploy := new(appsv1.Deployment)
-	deploy.Name = strings.Replace(node,".","-",1)
+	deploy.Name = strings.Replace(node, ".", "-", 1)
 	deploy.Namespace = node[index+1:]
 	//获取
-	deployment := k.client.GetDeployment(deploy,metav1.GetOptions{})
+	deployment := k.client.GetDeployment(deploy, metav1.GetOptions{})
 
 	csize := len(deployment.Spec.Template.Spec.Containers)
-	cpu := fmt.Sprintf("%.0fm",resources.CPU / float64(csize) *1000)
-	memory := fmt.Sprintf("%dMi",resources.Memory / csize)
+	cpu := fmt.Sprintf("%.0fm", resources.CPU/float64(csize)*1000)
+	memory := fmt.Sprintf("%dMi", resources.Memory/csize)
 
-	containers := make([]corev1.Container,csize)
-	for i,cont := range deployment.Spec.Template.Spec.Containers {
+	containers := make([]corev1.Container, csize)
+	for i, cont := range deployment.Spec.Template.Spec.Containers {
 		cpuQuantity := cont.Resources.Limits["cpu"]
 		cpuQuantity.UnmarshalJSON([]byte(cpu))
 		cont.Resources.Limits["cpu"] = cpuQuantity

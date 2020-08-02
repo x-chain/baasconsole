@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/go-xorm/xorm"
 	"fmt"
-	"github.com/jonluo94/baasmanager/baas-gateway/model"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
+	"github.com/go-xorm/xorm"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
+	"github.com/x-chain/baasconsole/baas-gateway/model"
 )
 
 type DashboardService struct {
@@ -57,7 +57,7 @@ func (d *DashboardService) SevenDays(userAccount string, start, end int) (bool, 
 	where := " where 1=1 "
 	uwhere := where
 	if userAccount != "" {
-		where += fmt.Sprintf(" and user_account = '%s'" , userAccount)
+		where += fmt.Sprintf(" and user_account = '%s'", userAccount)
 	}
 
 	if start != 0 {
@@ -67,7 +67,7 @@ func (d *DashboardService) SevenDays(userAccount string, start, end int) (bool, 
 	}
 
 	if end != 0 {
-		 ws := fmt.Sprintf(" and created <= %d", end)
+		ws := fmt.Sprintf(" and created <= %d", end)
 		where += ws
 		uwhere += ws
 	}
@@ -111,7 +111,7 @@ func (d *DashboardService) ConsensusTotal(userAccount string) (bool, []map[strin
 	group := ` group by consensus `
 	where := " where 1=1 "
 	if userAccount != "" {
-		where += fmt.Sprintf(" and user_account = '%s'" , userAccount)
+		where += fmt.Sprintf(" and user_account = '%s'", userAccount)
 	}
 
 	totals, err := d.DbEngine.QueryString(sql + where + group)
@@ -119,5 +119,5 @@ func (d *DashboardService) ConsensusTotal(userAccount string) (bool, []map[strin
 		logger.Error(err.Error())
 	}
 
-	return true,totals
+	return true, totals
 }

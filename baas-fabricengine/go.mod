@@ -1,4 +1,4 @@
-module github.com/jonluo94/baasmanager/baas-fabricengine
+module github.com/x-chain/baasconsole/baas-fabricengine
 
 go 1.12
 
@@ -17,7 +17,7 @@ require (
 	github.com/hyperledger/fabric-sdk-go v1.0.0-alpha5.0.20190411180201-5a9a0e749e4f // indirect
 	github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric v0.0.0-20190411180201-5a9a0e749e4f // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/jonluo94/baasmanager/baas-core v0.0.0
+	github.com/x-chain/baasconsole/baas-core v0.0.0
 	github.com/magiconair/properties v1.8.0 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20180511142126-bb74f1db0675 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
@@ -35,4 +35,4 @@ require (
 	k8s.io/apimachinery v0.0.0-20190703205208-4cfb76a8bf76 // indirect
 )
 
-replace github.com/jonluo94/baasmanager/baas-core v0.0.0 => ../baas-core
+replace github.com/x-chain/baasconsole/baas-core v0.0.0 => ../baas-core

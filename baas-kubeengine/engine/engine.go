@@ -1,13 +1,13 @@
 package engine
 
 import (
+	"github.com/x-chain/baasconsole/baas-core/common/json"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/common/queue"
+	"github.com/x-chain/baasconsole/baas-core/core/kubeclient"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"github.com/jonluo94/baasmanager/baas-core/core/kubeclient"
-	"github.com/jonluo94/baasmanager/baas-core/common/queue"
-	"github.com/jonluo94/baasmanager/baas-core/common/json"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 )
 
 var logger = log.GetLogger("kubeengine.engine", log.INFO)
@@ -64,24 +64,23 @@ func (k *KubeEngine) DoDeleteTasks() {
 		item := k.jobs.Dequeue()
 		deletePolicy := metav1.DeletePropagationForeground
 		delops := &metav1.DeleteOptions{PropagationPolicy: &deletePolicy}
-			switch item.(type) {
+		switch item.(type) {
 		case *corev1.Namespace:
-			k.client.DeleteNameSpace(item.(*corev1.Namespace),delops)
+			k.client.DeleteNameSpace(item.(*corev1.Namespace), delops)
 		case *appsv1.Deployment:
-			k.client.DeleteDeployment(item.(*appsv1.Deployment),delops)
+			k.client.DeleteDeployment(item.(*appsv1.Deployment), delops)
 		case *corev1.Service:
-			k.client.DeleteService(item.(*corev1.Service),delops)
+			k.client.DeleteService(item.(*corev1.Service), delops)
 		case *corev1.PersistentVolume:
-			k.client.DeletePersistentVolume(item.(*corev1.PersistentVolume),delops)
+			k.client.DeletePersistentVolume(item.(*corev1.PersistentVolume), delops)
 		case *corev1.PersistentVolumeClaim:
-			k.client.DeletePersistentVolumeClaim(item.(*corev1.PersistentVolumeClaim),delops)
+			k.client.DeletePersistentVolumeClaim(item.(*corev1.PersistentVolumeClaim), delops)
 		case *appsv1.StatefulSet:
-			k.client.DeleteStatefulSet(item.(*appsv1.StatefulSet),delops)
+			k.client.DeleteStatefulSet(item.(*appsv1.StatefulSet), delops)
 		}
 
 	}
 }
-
 
 func Bytes2K8sEntities(jsonArray [][]byte) *queue.Queue {
 

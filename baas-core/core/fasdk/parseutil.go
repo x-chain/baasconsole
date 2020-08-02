@@ -2,65 +2,64 @@ package fasdk
 
 import (
 	"bytes"
-	"fmt"
-	"encoding/pem"
-	"github.com/hyperledger/fabric/protos/utils"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/protos/common"
-	cm "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
 	"crypto/x509"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/jonluo94/baasmanager/baas-core/common/json"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
 	"encoding/hex"
+	"encoding/pem"
+	"fmt"
+	cm "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/fabric/common/configtx"
+	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/x-chain/baasconsole/baas-core/common/json"
 )
 
 type FabricBlock struct {
-	Number uint64 `json:"number"`
-	CurrentBlockHash string `json:"currentBlockHash"`
-	PreviousBlockHash string `json:"previousBlockHash"`
-	Transactions []FabricTransaction `json:"transactions"`
+	Number            uint64              `json:"number"`
+	CurrentBlockHash  string              `json:"currentBlockHash"`
+	PreviousBlockHash string              `json:"previousBlockHash"`
+	Transactions      []FabricTransaction `json:"transactions"`
 }
 
 type FabricTransaction struct {
-	No int64 `json:"no"`
-	Status string `json:"status"`
-	Txid string `json:"txid"`
-	Channel string `json:"channel"`
-	Type string `json:"type"`
-	Subject string `json:"subject"`
-	Config string `json:"config"`
-	Timestamp int64 `json:"timestamp"`
-	Actions []FabricTransactionAction `json:"actions"`
+	No        int64                     `json:"no"`
+	Status    string                    `json:"status"`
+	Txid      string                    `json:"txid"`
+	Channel   string                    `json:"channel"`
+	Type      string                    `json:"type"`
+	Subject   string                    `json:"subject"`
+	Config    string                    `json:"config"`
+	Timestamp int64                     `json:"timestamp"`
+	Actions   []FabricTransactionAction `json:"actions"`
 }
 
 type FabricTransactionAction struct {
-	Endorsers []string `json:"endorsers"`
-	RWSet  []FabricTransactionActionRWSet `json:"rwSet"`
+	Endorsers []string                       `json:"endorsers"`
+	RWSet     []FabricTransactionActionRWSet `json:"rwSet"`
 }
 
 type FabricTransactionActionRWSet struct {
-	Cc string `json:"cc"`
+	Cc   string   `json:"cc"`
 	RSet []string `json:"rSet"`
 	WSet []string `json:"wSet"`
 }
 
-
-func blockParse(block *cm.Block ) *common.Block{
+func blockParse(block *cm.Block) *common.Block {
 	if block == nil {
 		return nil
 	}
 	cmBlock := new(common.Block)
 	cmBlock.Data = &common.BlockData{
-		Data:block.Data.Data,
+		Data: block.Data.Data,
 	}
-	cmBlock.Header= &common.BlockHeader{
-		Number: block.Header.Number,
+	cmBlock.Header = &common.BlockHeader{
+		Number:       block.Header.Number,
 		PreviousHash: block.Header.PreviousHash,
-		DataHash: block.Header.DataHash,
+		DataHash:     block.Header.DataHash,
 	}
-	cmBlock.Metadata =&common.BlockMetadata{
+	cmBlock.Metadata = &common.BlockMetadata{
 		Metadata: block.Metadata.Metadata,
 	}
 	return cmBlock
@@ -85,14 +84,14 @@ func decodeSerializedIdentity(creator []byte) (string, error) {
 	return uname, nil
 }
 
-func parseBlock(block *common.Block) (*FabricBlock,error) {
+func parseBlock(block *common.Block) (*FabricBlock, error) {
 	if block == nil {
-		return nil,nil
+		return nil, nil
 	}
 
 	var err error
 	faBlock := new(FabricBlock)
-	trans := make([]FabricTransaction,0)
+	trans := make([]FabricTransaction, 0)
 	// Handle header
 	faBlock.Number = block.GetHeader().Number
 	faBlock.CurrentBlockHash = hex.EncodeToString(block.GetHeader().Hash())
@@ -118,18 +117,18 @@ func parseBlock(block *common.Block) (*FabricBlock,error) {
 
 		var env *common.Envelope
 		if env, err = utils.GetEnvelopeFromBlock(envBytes); err != nil {
-			return nil,err
+			return nil, err
 		}
 
 		var payload *common.Payload
 		if payload, err = utils.GetPayload(env); err != nil {
-			return nil,err
+			return nil, err
 		}
 
 		var chdr *common.ChannelHeader
 		chdr, err = utils.UnmarshalChannelHeader(payload.Header.ChannelHeader)
-		if  err != nil {
-			return nil,err
+		if err != nil {
+			return nil, err
 		}
 		tran.Txid = chdr.TxId
 		tran.Channel = chdr.ChannelId
@@ -138,62 +137,62 @@ func parseBlock(block *common.Block) (*FabricBlock,error) {
 		var shdr *common.SignatureHeader
 		shdr, err = utils.GetSignatureHeader(payload.Header.SignatureHeader)
 		if err != nil {
-			return nil,err
+			return nil, err
 		}
 
 		var subject string
 		subject, err = decodeSerializedIdentity(shdr.Creator)
-		if  err != nil {
-			return nil,err
+		if err != nil {
+			return nil, err
 		}
 		tran.Subject = subject
 		if common.HeaderType(chdr.Type) == common.HeaderType_CONFIG {
 			tran.Type = "CONFIG"
 			conf, err := parseConfig(payload)
 			if err != nil {
-				return nil,err
+				return nil, err
 			}
 			tran.Config = string(conf)
 		} else if common.HeaderType(chdr.Type) == common.HeaderType_ENDORSER_TRANSACTION {
 			tran.Type = "ENDORSER_TRANSACTION"
 			actions, err := parseEndorserTransaction(payload)
 			if err != nil {
-				return nil,err
+				return nil, err
 			}
 			tran.Actions = actions
 		} else {
 			tran.Type = "UNKNOWN"
 		}
 
-		trans = append(trans,tran)
+		trans = append(trans, tran)
 	}
 	faBlock.Transactions = trans
-	return faBlock,nil
+	return faBlock, nil
 }
 
-func parseEndorserTransaction(payload *common.Payload) ([]FabricTransactionAction,error) {
+func parseEndorserTransaction(payload *common.Payload) ([]FabricTransactionAction, error) {
 	var err error
 	var tx *peer.Transaction
 	if tx, err = utils.GetTransaction(payload.Data); err != nil {
-		return nil,err
+		return nil, err
 	}
-	actions := make([]FabricTransactionAction,len(tx.Actions))
+	actions := make([]FabricTransactionAction, len(tx.Actions))
 
 	for i, action := range tx.Actions {
 		act := FabricTransactionAction{}
 
-		var ca        *peer.ChaincodeAction
+		var ca *peer.ChaincodeAction
 		var capayload *peer.ChaincodeActionPayload
 		capayload, ca, err = utils.GetPayloads(action)
-		if  err != nil {
-			return nil,err
+		if err != nil {
+			return nil, err
 		}
-		endorsers := make([]string,len(capayload.Action.Endorsements))
+		endorsers := make([]string, len(capayload.Action.Endorsements))
 		for j, endorser := range capayload.Action.Endorsements {
-			var  subject string
+			var subject string
 			subject, err = decodeSerializedIdentity(endorser.Endorser)
 			if err != nil {
-				return nil,err
+				return nil, err
 			}
 			endorsers[j] = subject
 		}
@@ -202,47 +201,47 @@ func parseEndorserTransaction(payload *common.Payload) ([]FabricTransactionActio
 		txRWSet := &rwsetutil.TxRwSet{}
 		err = txRWSet.FromProtoBytes(ca.Results)
 		if err != nil {
-			return nil,err
+			return nil, err
 		}
 
-		rwSets := make([]FabricTransactionActionRWSet,0)
+		rwSets := make([]FabricTransactionActionRWSet, 0)
 		for _, nsRWSet := range txRWSet.NsRwSets {
 			ns := nsRWSet.NameSpace
-			if ns != "lscc" {   // skip system chaincode
+			if ns != "lscc" { // skip system chaincode
 				rwSet := FabricTransactionActionRWSet{}
 				rwSet.Cc = ns
-				rset := make([]string,len(nsRWSet.KvRwSet.Reads))
+				rset := make([]string, len(nsRWSet.KvRwSet.Reads))
 				for i, kvRead := range nsRWSet.KvRwSet.Reads {
-					rset[i] = fmt.Sprintf("key=%v,version=%v",kvRead.Key,kvRead.Version)
+					rset[i] = fmt.Sprintf("key=%v,version=%v", kvRead.Key, kvRead.Version)
 				}
 				rwSet.RSet = rset
 
-				wset := make([]string,len(nsRWSet.KvRwSet.Writes))
+				wset := make([]string, len(nsRWSet.KvRwSet.Writes))
 				for i, kvWrite := range nsRWSet.KvRwSet.Writes {
-					wset[i] = fmt.Sprintf("key=%v,isDelete=%v,value=%v",kvWrite.Key,kvWrite.IsDelete,string(kvWrite.Value))
+					wset[i] = fmt.Sprintf("key=%v,isDelete=%v,value=%v", kvWrite.Key, kvWrite.IsDelete, string(kvWrite.Value))
 				}
 				rwSet.WSet = wset
-				rwSets = append(rwSets,rwSet)
+				rwSets = append(rwSets, rwSet)
 			}
 		}
 		act.RWSet = rwSets
-		actions[i]= act
+		actions[i] = act
 	}
-	return actions,nil
+	return actions, nil
 }
 
-func parseConfig(payload *common.Payload) ([]byte,error) {
+func parseConfig(payload *common.Payload) ([]byte, error) {
 	var err error
 
 	var configEnvelope *common.ConfigEnvelope
 	configEnvelope, err = configtx.UnmarshalConfigEnvelope(payload.Data)
-	if  err != nil {
-		return nil,err
+	if err != nil {
+		return nil, err
 	}
 	config := configEnvelope.Config
-	conf ,err := json.Marshal(config)
-	if  err != nil {
-		return nil,err
+	conf, err := json.Marshal(config)
+	if err != nil {
+		return nil, err
 	}
-	return conf,nil
+	return conf, nil
 }

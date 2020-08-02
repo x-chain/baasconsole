@@ -1,17 +1,17 @@
 package generate
 
 import (
-	"io/ioutil"
 	"bytes"
-	"os"
-	"strings"
-	"strconv"
 	"fmt"
+	"github.com/x-chain/baasconsole/baas-core/common/util"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-fabricengine/config"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
+	"io/ioutil"
+	"os"
 	"path/filepath"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/util"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/config"
+	"strconv"
+	"strings"
 )
 
 var (

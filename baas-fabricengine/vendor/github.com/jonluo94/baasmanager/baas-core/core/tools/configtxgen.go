@@ -14,15 +14,15 @@ import (
 
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/encoder"
-	genesisconfig "github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/localconfig"
-	"github.com/jonluo94/baasmanager/baas-core/core/tools/fabric/common/configtxgen/metadata"
 	"github.com/hyperledger/fabric/common/tools/protolator"
 	cb "github.com/hyperledger/fabric/protos/common"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"github.com/hyperledger/fabric/protos/utils"
 	"github.com/pkg/errors"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/encoder"
+	genesisconfig "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/localconfig"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/metadata"
 )
 
 var exitCode = 0

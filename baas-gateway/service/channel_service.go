@@ -1,11 +1,11 @@
 package service
 
 import (
-	"github.com/go-xorm/xorm"
 	"encoding/json"
+	"github.com/go-xorm/xorm"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
 	"time"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
 )
 
 type ChannelService struct {

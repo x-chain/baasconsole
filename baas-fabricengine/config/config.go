@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/spf13/viper"
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 	"github.com/fsnotify/fsnotify"
+	"github.com/spf13/viper"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"os"
 )
 
@@ -34,7 +34,7 @@ func loadConfig() {
 	viper.AddConfigPath(".")         // optionally look for kubeconfig in the working directory
 	viper.AddConfigPath("/etc/baas") // path to look for the kubeconfig file in
 	err := viper.ReadInConfig()      // Find and read the feconfig.yaml file
-	if err != nil { // Handle errors reading the kubeconfig file
+	if err != nil {                  // Handle errors reading the kubeconfig file
 		logger.Errorf("Fatal error config file: %s \n", err)
 		os.Exit(-1)
 	}

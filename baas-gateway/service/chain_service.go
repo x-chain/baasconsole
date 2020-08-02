@@ -1,13 +1,13 @@
 package service
 
 import (
-	"github.com/go-xorm/xorm"
 	"bytes"
+	"github.com/go-xorm/xorm"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/json"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
 	"io"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	"github.com/jonluo94/baasmanager/baas-core/common/json"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
 )
 
 type ChainService struct {
@@ -46,13 +46,12 @@ func (l *ChainService) UpdateStatus(chain *entity.Chain) (bool, string) {
 	if err != nil {
 		logger.Error(err.Error())
 	}
-	r,err := res.RowsAffected()
-	if err == nil && r > 0{
+	r, err := res.RowsAffected()
+	if err == nil && r > 0 {
 		return true, "update success"
 	}
 	return false, "update fail"
 }
-
 
 func (l *ChainService) Delete(id int) (bool, string) {
 	i, err := l.DbEngine.Where("id = ?", id).Delete(&entity.Chain{})
@@ -152,7 +151,6 @@ func (l *ChainService) RunChain(chain *entity.Chain) (bool, string) {
 
 func (l *ChainService) QueryChainPods(chain *entity.Chain) (bool, interface{}) {
 
-
 	fc := entity.ParseFabircChain(chain)
 	resp := l.FabircService.QueryChainPods(fc)
 	var ret gintool.RespData
@@ -162,7 +160,7 @@ func (l *ChainService) QueryChainPods(chain *entity.Chain) (bool, interface{}) {
 	}
 
 	if ret.Code == 0 {
-		return true,ret.Data
+		return true, ret.Data
 	} else {
 		return false, ret.Msg
 	}
@@ -179,13 +177,12 @@ func (l *ChainService) ChangeChainResouces(resouce *model.Resources) (bool, inte
 	}
 
 	if ret.Code == 0 {
-		return true,ret.Data
+		return true, ret.Data
 	} else {
 		return false, ret.Msg
 	}
 
 }
-
 
 func (l *ChainService) StopChain(chain *entity.Chain) (bool, string) {
 

@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"strconv"
 	"github.com/gin-gonic/gin"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
+	"strconv"
 )
 
 func (a *ApiController) RoleList(ctx *gin.Context) {

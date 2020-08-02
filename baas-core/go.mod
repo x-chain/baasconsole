@@ -1,3 +1,3 @@
-module github.com/jonluo94/baasmanager/baas-core
+module github.com/x-chain/baasconsole/baas-core
 
 go 1.12

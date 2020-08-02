@@ -2,11 +2,11 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/password"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
+	"github.com/x-chain/baasconsole/baas-gateway/model"
 	"strconv"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	"github.com/jonluo94/baasmanager/baas-gateway/model"
-	"github.com/jonluo94/baasmanager/baas-core/common/password"
 )
 
 func (a *ApiController) UserAdd(ctx *gin.Context) {

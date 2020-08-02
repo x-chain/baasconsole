@@ -1,13 +1,13 @@
 package xorm
 
 import (
-	"io/ioutil"
-	"gopkg.in/yaml.v2"
-	"github.com/go-xorm/xorm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-xorm/xorm"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 
-	"github.com/jonluo94/baasmanager/baas-core/common/log"
 	"github.com/go-xorm/core"
+	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"time"
 )
 

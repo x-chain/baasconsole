@@ -1,15 +1,15 @@
 package service
 
 import (
-	"github.com/go-xorm/xorm"
-	"time"
-	"io/ioutil"
-	"strings"
-	"strconv"
 	"fmt"
-	"github.com/jonluo94/baasmanager/baas-gateway/entity"
-	"github.com/jonluo94/baasmanager/baas-core/common/gintool"
-	"github.com/jonluo94/baasmanager/baas-core/common/json"
+	"github.com/go-xorm/xorm"
+	"github.com/x-chain/baasconsole/baas-core/common/gintool"
+	"github.com/x-chain/baasconsole/baas-core/common/json"
+	"github.com/x-chain/baasconsole/baas-gateway/entity"
+	"io/ioutil"
+	"strconv"
+	"strings"
+	"time"
 )
 
 type ChaincodeService struct {
@@ -279,10 +279,10 @@ func (l *ChaincodeService) QueryLatestBlocks(chain *entity.Chain, channel *entit
 
 }
 
-func (l *ChaincodeService) QueryBlock(chain *entity.Chain, channel *entity.Channel,search string) (bool, interface{}) {
+func (l *ChaincodeService) QueryBlock(chain *entity.Chain, channel *entity.Channel, search string) (bool, interface{}) {
 
 	fc := entity.ParseFabircChainAndChannel(chain, channel)
-	resp := l.FabircService.QueryBlock(fc,search)
+	resp := l.FabircService.QueryBlock(fc, search)
 	var ret gintool.RespData
 	err := json.Unmarshal(resp, &ret)
 	if err != nil {

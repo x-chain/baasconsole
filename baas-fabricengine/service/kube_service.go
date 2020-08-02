@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/jonluo94/baasmanager/baas-core/common/httputil"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/config"
-	"github.com/jonluo94/baasmanager/baas-fabricengine/constant"
-	"github.com/jonluo94/baasmanager/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-core/common/httputil"
+	"github.com/x-chain/baasconsole/baas-core/core/model"
+	"github.com/x-chain/baasconsole/baas-fabricengine/config"
+	"github.com/x-chain/baasconsole/baas-fabricengine/constant"
 )
 
 type KubeService struct {
