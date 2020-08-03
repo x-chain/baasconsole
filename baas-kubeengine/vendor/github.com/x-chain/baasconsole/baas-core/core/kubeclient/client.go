@@ -2,15 +2,14 @@ package kubeclient
 
 import (
 	"fmt"
-	"os"
-	"os/user"
-	"path/filepath"
-
 	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"k8s.io/client-go/kubernetes"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
+	"os"
+	"os/user"
+	"path/filepath"
 )
 
 var logger = log.GetLogger("kubeclient", log.INFO)
