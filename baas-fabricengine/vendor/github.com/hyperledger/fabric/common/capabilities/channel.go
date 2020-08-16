@@ -8,7 +8,7 @@ package capabilities
 
 import (
 	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
+	cb "github.com/hyperledger/fabric-protos-go/common"
 )
 
 const (

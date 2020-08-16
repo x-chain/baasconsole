@@ -18,7 +18,7 @@ import (
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/bccsp/signer"
-	m "github.com/hyperledger/fabric/protos/msp"
+	m "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

@@ -12,10 +12,10 @@ require (
 	github.com/gin-contrib/sessions v0.0.0-20190512062852-3cb4c4f2d615 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/hashicorp/go-version v1.2.0 // indirect
-	github.com/hyperledger/fabric v1.4.1 // indirect
+	github.com/hyperledger/fabric v2.1.1+incompatible // indirect
 	github.com/hyperledger/fabric-amcl v0.0.0-20181230093703-5ccba6eab8d6 // indirect
-	github.com/hyperledger/fabric-sdk-go v1.0.0-alpha5.0.20190411180201-5a9a0e749e4f // indirect
-	github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric v0.0.0-20190411180201-5a9a0e749e4f // indirect
+	github.com/hyperledger/fabric-sdk-go v1.0.0-beta2 // indirect
+	// github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric v0.0.0-20190411180201-5a9a0e749e4f // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.0 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20180511142126-bb74f1db0675 // indirect

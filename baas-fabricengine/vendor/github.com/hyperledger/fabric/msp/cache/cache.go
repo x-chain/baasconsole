@@ -9,7 +9,7 @@ package cache
 import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/msp"
-	pmsp "github.com/hyperledger/fabric/protos/msp"
+	pmsp "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

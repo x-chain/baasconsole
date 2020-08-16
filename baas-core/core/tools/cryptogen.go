@@ -14,10 +14,10 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/hyperledger/fabric/common/tools/cryptogen/ca"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/csp"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/metadata"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/msp"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/cryptogen/ca"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/cryptogen/csp"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/cryptogen/metadata"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/cryptogen/msp"
 	"gopkg.in/yaml.v2"
 )
 

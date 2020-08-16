@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package dispatcher
 
 import (
+	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/logging"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/options"
 	fabcontext "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/context"
@@ -15,9 +16,8 @@ import (
 	clientdisp "github.com/hyperledger/fabric-sdk-go/pkg/fab/events/client/dispatcher"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/deliverclient/connection"
 	esdispatcher "github.com/hyperledger/fabric-sdk-go/pkg/fab/events/service/dispatcher"
-	cb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/orderer"
-	pb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/peer"
+	ab "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/orderer"
+	pb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

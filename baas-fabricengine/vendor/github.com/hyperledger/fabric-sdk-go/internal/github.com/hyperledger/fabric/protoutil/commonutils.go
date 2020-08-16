@@ -15,7 +15,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes/timestamp"
-	cb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
+	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/pkg/errors"
 )
 

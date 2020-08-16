@@ -8,7 +8,7 @@ package capabilities
 
 import (
 	"github.com/hyperledger/fabric/common/flogging"
-	cb "github.com/hyperledger/fabric/protos/common"
+	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/pkg/errors"
 )
 

@@ -17,7 +17,7 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
 	corecomm "github.com/hyperledger/fabric-sdk-go/pkg/core/config/comm"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/comm"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/discovery"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )

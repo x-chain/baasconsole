@@ -20,7 +20,7 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/deliverclient/dispatcher"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/deliverclient/seek"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/events/endpoint"
-	ab "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/orderer"
+	ab "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"
 )
 

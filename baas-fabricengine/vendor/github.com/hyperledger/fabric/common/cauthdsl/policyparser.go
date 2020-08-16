@@ -24,9 +24,9 @@ import (
 	"strings"
 
 	"github.com/Knetic/govaluate"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric-protos-go/msp"
+	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 )
 
 // Gate values

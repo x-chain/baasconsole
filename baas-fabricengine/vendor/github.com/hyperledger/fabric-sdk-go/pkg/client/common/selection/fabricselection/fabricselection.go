@@ -27,7 +27,7 @@ import (
 	fabdiscovery "github.com/hyperledger/fabric-sdk-go/pkg/fab/discovery"
 	"github.com/hyperledger/fabric-sdk-go/pkg/util/concurrent/lazycache"
 	"github.com/hyperledger/fabric-sdk-go/pkg/util/concurrent/lazyref"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/discovery"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/pkg/errors"
 	grpcCodes "google.golang.org/grpc/codes"
 )

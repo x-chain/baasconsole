@@ -10,3 +10,4 @@ bin/**
 bin_mac/**
 bin_x86/**
 **/.DS_Store
+build/**

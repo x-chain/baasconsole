@@ -12,6 +12,7 @@ import (
 	"regexp"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/hyperledger/fabric-protos-go/common"
 	channelConfig "github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/channelconfig"
 	imsp "github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
@@ -22,9 +23,8 @@ import (
 	contextImpl "github.com/hyperledger/fabric-sdk-go/pkg/context"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/resource"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
-	mb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/msp"
-	pb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/peer"
+	mb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/msp"
+	pb "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

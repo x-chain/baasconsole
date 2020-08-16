@@ -12,9 +12,9 @@ package protoutil
 
 import (
 	"github.com/golang/protobuf/proto"
+	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

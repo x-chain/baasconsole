@@ -15,7 +15,7 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/viperutil"
 	cf "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/core/config"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/viper"

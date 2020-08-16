@@ -21,7 +21,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	factory "github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkpatch/cryptosuitebridge"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/core"
-	m "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/msp"
+	m "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 

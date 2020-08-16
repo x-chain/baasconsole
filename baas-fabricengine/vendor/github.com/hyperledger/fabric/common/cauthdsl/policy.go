@@ -13,8 +13,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mspp "github.com/hyperledger/fabric/protos/msp"
+	cb "github.com/hyperledger/fabric-protos-go/common"
+	mspp "github.com/hyperledger/fabric-protos-go/msp"
 )
 
 type Identity interface {

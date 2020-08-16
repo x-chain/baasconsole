@@ -6,13 +6,14 @@ import (
 	"encoding/hex"
 	"encoding/pem"
 	"fmt"
-	cm "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/common"
+
+	"github.com/hyperledger/fabric-protos-go/common"
+	cm "github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/configtx"
 	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
 	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/x-chain/baasconsole/baas-core/common/json"
 )
 

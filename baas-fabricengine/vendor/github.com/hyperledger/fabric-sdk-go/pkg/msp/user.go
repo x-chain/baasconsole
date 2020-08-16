@@ -11,7 +11,7 @@ import (
 
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/core"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/msp"
-	pb_msp "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/protos/msp"
+	pb_msp "github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/pkg/errors"
 )
 
