@@ -15,10 +15,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	mockmsp "github.com/hyperledger/fabric/common/mocks/msp"
 	"github.com/hyperledger/fabric/common/util"
-	cb "github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	pb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/stretchr/testify/assert"
+	cb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"
 )
 
 func TestGetPayloads(t *testing.T) {

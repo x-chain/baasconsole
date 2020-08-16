@@ -27,8 +27,8 @@ import (
 	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
 	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	mspprotos "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/msp"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

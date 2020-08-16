@@ -13,8 +13,8 @@ import (
 	"github.com/hyperledger/fabric/common/configtx"
 	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
 	"github.com/hyperledger/fabric/core/ledger/util"
-	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/x-chain/baasconsole/baas-core/common/json"
+	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 )
 
 type FabricBlock struct {

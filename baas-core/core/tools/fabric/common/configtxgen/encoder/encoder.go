@@ -16,11 +16,11 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/genesis"
 	"github.com/hyperledger/fabric/common/policies"
-	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/configtxlator/update"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/msp"
-	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	genesisconfig "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/localconfig"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/configtxlator/update"
+	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"

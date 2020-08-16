@@ -17,12 +17,12 @@ import (
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/hyperledger/fabric/common/tools/protolator"
-	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/pkg/errors"
 	"github.com/x-chain/baasconsole/baas-core/common/log"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/encoder"
 	genesisconfig "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/localconfig"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/common/configtxgen/metadata"
+	utils "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 )
 
 var exitCode = 0

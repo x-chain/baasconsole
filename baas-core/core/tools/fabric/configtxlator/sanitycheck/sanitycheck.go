@@ -12,7 +12,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	newchannelconfig "github.com/hyperledger/fabric/common/channelconfig"
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
+	mspprotos "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/msp"
 )
 
 type Messages struct {

@@ -15,8 +15,8 @@ import (
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/crypto"
 	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
 	"github.com/pkg/errors"
 )
 

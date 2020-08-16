@@ -21,9 +21,9 @@ import (
 	"github.com/hyperledger/fabric/msp"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/msp/mgmt/testtools"
-	"github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"
+	pb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
+	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

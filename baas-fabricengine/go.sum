@@ -230,6 +230,7 @@ github.com/ugorji/go v1.1.4 h1:j4s+tAvLfL3bZyefP2SEWmhBzmuIlH/eqNuPdFPgngw=
 github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGrc=
 github.com/x-chain/baasconsole v0.0.0 h1:I+3vaZ/Dj5iA/xi8WrUnQKiKY5kBd4Yx8akeWZ/sH/0=
 github.com/x-chain/baasconsole/baas-core v0.0.0-20200803093215-7ab343177a04 h1:T0CCGaM3wPoI73R8HaCc2PsnUUzb1G7Rn3KaRk47BzE=
+github.com/x-chain/baasconsole/baas-core v0.0.0-20200816141042-07447aa2a2be h1:QxQ5cDB4YES5LsokqxLJofilxDreIZQYCAVo7AowJWY=
 github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c/go.mod h1:lB8K/P019DLNhemzwFU4jHLhdvlE6uDZjXFejJXr49I=
 github.com/xdg/stringprep v1.0.0/go.mod h1:Jhud4/sHMO4oL310DaZAKk9ZaJ08SJfe+sJh0HrGL1Y=
 go.uber.org/atomic v1.3.2 h1:2Oa65PReHzfn29GpvgsYwloV9AVFHPDk8tYxt2c2tr4=
