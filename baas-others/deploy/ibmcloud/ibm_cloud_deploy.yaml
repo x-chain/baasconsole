@@ -1,0 +1,1466 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: ibm-privileged-psp
+      productID: 54283fa24f1a4e8589964e6e92626ec4
+      productName: IBM Blockchain Platform
+      productVersion: 2.1.3
+    creationTimestamp: "2020-08-01T08:19:48Z"
+    generateName: ibp-operator-659d6bdcdf-
+    labels:
+      app.kubernetes.io/instance: operator
+      app.kubernetes.io/managed-by: ibp-operator
+      app.kubernetes.io/name: ibp
+      helm.sh/chart: ibm-ibp
+      name: ibp-operator
+      pod-template-hash: 659d6bdcdf
+      release: operator
+    name: ibp-operator-659d6bdcdf-z6bxm
+    namespace: n105f5e
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: ibp-operator-659d6bdcdf
+      uid: ee0005da-3d28-49c5-85d5-7e418e9d9eea
+    resourceVersion: "1607"
+    selfLink: /api/v1/namespaces/n105f5e/pods/ibp-operator-659d6bdcdf-z6bxm
+    uid: db945929-4186-41ed-8301-a5a0d051401f
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+    containers:
+    - command:
+      - ibp-operator
+      env:
+      - name: WATCH_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: OPERATOR_NAME
+        value: ibp-operator
+      - name: CLUSTERTYPE
+        value: FREESAAS
+      image: us.icr.io/ibp2/ibp-operator:2.5.0-20200618-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 5
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: 8383
+        timeoutSeconds: 5
+      name: ibp-operator
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        tcpSocket:
+          port: 8383
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: 100m
+          memory: 200Mi
+        requests:
+          cpu: 100m
+          memory: 200Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - CHOWN
+          - FOWNER
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 1001
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: n105f5e-token-dknkt
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: ibp-ibmregistry
+    nodeName: 10.144.215.158
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: n105f5e
+    serviceAccountName: n105f5e
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 600
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 600
+    volumes:
+    - name: n105f5e-token-dknkt
+      secret:
+        defaultMode: 420
+        secretName: n105f5e-token-dknkt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-01T08:19:48Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-01T08:20:16Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-01T08:20:16Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-01T08:19:48Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://8a628445ac8d5d04732b2265200a21be8e552b1c173a9d39ff3da558bebb3be0
+      image: us.icr.io/ibp2/ibp-operator:2.5.0-20200618-amd64
+      imageID: us.icr.io/ibp2/ibp-operator@sha256:a2bc21e37063ced0716728f8d91cccd43d24576f3bcd98ee50efb5c54a761221
+      lastState: {}
+      name: ibp-operator
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-01T08:20:02Z"
+    hostIP: 10.144.215.158
+    phase: Running
+    podIP: 172.30.167.77
+    podIPs:
+    - ip: 172.30.167.77
+    qosClass: Guaranteed
+    startTime: "2020-08-01T08:19:48Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: ibm-privileged-psp
+      productChargedContainers: ca
+      productID: 54283fa24f1a4e8589964e6e92626ec4
+      productMetric: VIRTUAL_PROCESSOR_CORE
+      productName: IBM Blockchain Platform
+      productVersion: "2.5"
+    creationTimestamp: "2020-08-12T12:57:36Z"
+    generateName: org1ca-6f7b745f48-
+    labels:
+      app: org1ca
+      app.kubernetes.io/instance: ibpca
+      app.kubernetes.io/managed-by: ibp-operator
+      app.kubernetes.io/name: ibp
+      creator: ibp
+      helm.sh/chart: ibm-ibp
+      pod-template-hash: 6f7b745f48
+      release: operator
+    name: org1ca-6f7b745f48-pbxtb
+    namespace: n105f5e
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: org1ca-6f7b745f48
+      uid: 22eea8e0-ba06-40f9-bc0e-0f22d0c7fe47
+    resourceVersion: "201332"
+    selfLink: /api/v1/namespaces/n105f5e/pods/org1ca-6f7b745f48-pbxtb
+    uid: 196a1830-39bf-49a4-94db-a68dbdfa8a60
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: failure-domain.beta.kubernetes.io/zone
+              operator: In
+              values:
+              - mil01
+            - key: failure-domain.beta.kubernetes.io/region
+              operator: In
+              values:
+              - eu-de
+    containers:
+    - command:
+      - sh
+      - -c
+      - mkdir -p /data/tlsca && cp /config/tlsca/fabric-ca-server-config.yaml /data/tlsca
+        && mkdir -p /data/ca && cp /config/ca/fabric-ca-server-config.yaml /data/ca
+        && fabric-ca-server start --home /data/ca
+      env:
+      - name: LICENSE
+        value: accept
+      - name: FABRIC_CA_HOME
+        value: /data/ca
+      - name: SERVICE_HOST
+        value: ca
+      - name: FABRIC_CA_SERVER_OPERATIONS_TLS_CERT_FILE
+        value: /crypto/ca/operations-cert.pem
+      - name: FABRIC_CA_SERVER_OPERATIONS_TLS_KEY_FILE
+        value: /crypto/ca/operations-key.pem
+      - name: HOST_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: us.icr.io/ibp2/ibp-ca:1.4.7-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      name: ca
+      ports:
+      - containerPort: 7054
+        name: ca
+        protocol: TCP
+      - containerPort: 9443
+        name: operations
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 26
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /crypto/ca
+        name: ca-crypto
+      - mountPath: /crypto/tlsca
+        name: tlsca-crypto
+      - mountPath: /config/ca
+        name: ca-config
+      - mountPath: /config/tlsca
+        name: tlsca-config
+      - mountPath: /data
+        name: fabric-ca
+        subPath: fabric-ca-server
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: org1ca-token-pqhfv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: ibp-ibmregistry
+    initContainers:
+    - command:
+      - sh
+      - -c
+      - mkdir -p /data/db && chmod -R 775 /data/ && chown -R -H 1000:1000 /data/
+      env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      name: init
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities:
+          add:
+          - CHOWN
+          - FOWNER
+          drop:
+          - ALL
+        privileged: true
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: fabric-ca
+        subPath: fabric-ca-server
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: org1ca-token-pqhfv
+        readOnly: true
+    nodeName: 10.144.215.158
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
+    serviceAccount: org1ca
+    serviceAccountName: org1ca
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 600
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 600
+    volumes:
+    - emptyDir:
+        medium: Memory
+      name: shared
+    - name: fabric-ca
+      persistentVolumeClaim:
+        claimName: org1ca-pvc
+    - configMap:
+        defaultMode: 420
+        name: org1ca-ca
+      name: config
+    - name: ca-crypto
+      secret:
+        defaultMode: 420
+        secretName: org1ca-ca-crypto
+    - name: tlsca-crypto
+      secret:
+        defaultMode: 420
+        secretName: org1ca-tlsca-crypto
+    - configMap:
+        defaultMode: 420
+        name: org1ca-ca-config
+      name: ca-config
+    - configMap:
+        defaultMode: 420
+        name: org1ca-tlsca-config
+      name: tlsca-config
+    - name: org1ca-token-pqhfv
+      secret:
+        defaultMode: 420
+        secretName: org1ca-token-pqhfv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:57:47Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:58:29Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:58:29Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:57:36Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://075b99fa2feb7180156d98a24935b4658466c21f7f01a6be8759665e9390183e
+      image: us.icr.io/ibp2/ibp-ca:1.4.7-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-ca@sha256:07a27481d14a6c67b27b4937abfc6b744fcfdd1b50242900c58b6c20628bc597
+      lastState: {}
+      name: ca
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T12:57:59Z"
+    hostIP: 10.144.215.158
+    initContainerStatuses:
+    - containerID: containerd://fbe17a4a5c4fbc8cf43d1b0ac0acedf28bf30368dd92f8bb21bad37b2ba6a35e
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-init@sha256:15ae38636e160ef3be1204b5263cb084a4d78d20f86ee9145768d54217292e7f
+      lastState: {}
+      name: init
+      ready: true
+      restartCount: 0
+      state:
+        terminated:
+          containerID: containerd://fbe17a4a5c4fbc8cf43d1b0ac0acedf28bf30368dd92f8bb21bad37b2ba6a35e
+          exitCode: 0
+          finishedAt: "2020-08-12T12:57:47Z"
+          reason: Completed
+          startedAt: "2020-08-12T12:57:47Z"
+    phase: Running
+    podIP: 172.30.167.82
+    podIPs:
+    - ip: 172.30.167.82
+    qosClass: Burstable
+    startTime: "2020-08-12T12:57:36Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: ibm-privileged-psp
+      productChargedContainers: ca
+      productID: 54283fa24f1a4e8589964e6e92626ec4
+      productMetric: VIRTUAL_PROCESSOR_CORE
+      productName: IBM Blockchain Platform
+      productVersion: "2.5"
+    creationTimestamp: "2020-08-12T12:58:42Z"
+    generateName: org2ca-bff46f695-
+    labels:
+      app: org2ca
+      app.kubernetes.io/instance: ibpca
+      app.kubernetes.io/managed-by: ibp-operator
+      app.kubernetes.io/name: ibp
+      creator: ibp
+      helm.sh/chart: ibm-ibp
+      pod-template-hash: bff46f695
+      release: operator
+    name: org2ca-bff46f695-vn4zt
+    namespace: n105f5e
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: org2ca-bff46f695
+      uid: 6d20ec90-20d4-4d21-869d-b6713fd61783
+    resourceVersion: "201407"
+    selfLink: /api/v1/namespaces/n105f5e/pods/org2ca-bff46f695-vn4zt
+    uid: eb1d2321-c4fc-4bff-91b3-1634d01c2f10
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: failure-domain.beta.kubernetes.io/zone
+              operator: In
+              values:
+              - mil01
+            - key: failure-domain.beta.kubernetes.io/region
+              operator: In
+              values:
+              - eu-de
+    containers:
+    - command:
+      - sh
+      - -c
+      - mkdir -p /data/tlsca && cp /config/tlsca/fabric-ca-server-config.yaml /data/tlsca
+        && mkdir -p /data/ca && cp /config/ca/fabric-ca-server-config.yaml /data/ca
+        && fabric-ca-server start --home /data/ca
+      env:
+      - name: LICENSE
+        value: accept
+      - name: FABRIC_CA_HOME
+        value: /data/ca
+      - name: SERVICE_HOST
+        value: ca
+      - name: FABRIC_CA_SERVER_OPERATIONS_TLS_CERT_FILE
+        value: /crypto/ca/operations-cert.pem
+      - name: FABRIC_CA_SERVER_OPERATIONS_TLS_KEY_FILE
+        value: /crypto/ca/operations-key.pem
+      - name: HOST_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: us.icr.io/ibp2/ibp-ca:1.4.7-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      name: ca
+      ports:
+      - containerPort: 7054
+        name: ca
+        protocol: TCP
+      - containerPort: 9443
+        name: operations
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 26
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /crypto/ca
+        name: ca-crypto
+      - mountPath: /crypto/tlsca
+        name: tlsca-crypto
+      - mountPath: /config/ca
+        name: ca-config
+      - mountPath: /config/tlsca
+        name: tlsca-config
+      - mountPath: /data
+        name: fabric-ca
+        subPath: fabric-ca-server
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: org2ca-token-bns5t
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: ibp-ibmregistry
+    initContainers:
+    - command:
+      - sh
+      - -c
+      - mkdir -p /data/db && chmod -R 775 /data/ && chown -R -H 1000:1000 /data/
+      env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      name: init
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities:
+          add:
+          - CHOWN
+          - FOWNER
+          drop:
+          - ALL
+        privileged: true
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: fabric-ca
+        subPath: fabric-ca-server
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: org2ca-token-bns5t
+        readOnly: true
+    nodeName: 10.144.215.158
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
+    serviceAccount: org2ca
+    serviceAccountName: org2ca
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 600
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 600
+    volumes:
+    - emptyDir:
+        medium: Memory
+      name: shared
+    - name: fabric-ca
+      persistentVolumeClaim:
+        claimName: org2ca-pvc
+    - configMap:
+        defaultMode: 420
+        name: org2ca-ca
+      name: config
+    - name: ca-crypto
+      secret:
+        defaultMode: 420
+        secretName: org2ca-ca-crypto
+    - name: tlsca-crypto
+      secret:
+        defaultMode: 420
+        secretName: org2ca-tlsca-crypto
+    - configMap:
+        defaultMode: 420
+        name: org2ca-ca-config
+      name: ca-config
+    - configMap:
+        defaultMode: 420
+        name: org2ca-tlsca-config
+      name: tlsca-config
+    - name: org2ca-token-bns5t
+      secret:
+        defaultMode: 420
+        secretName: org2ca-token-bns5t
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:58:45Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:59:16Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:59:16Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T12:58:42Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://f987640a7d567516822d5217e5f2568fb02c511b03edcbb041790cd913863f73
+      image: us.icr.io/ibp2/ibp-ca:1.4.7-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-ca@sha256:07a27481d14a6c67b27b4937abfc6b744fcfdd1b50242900c58b6c20628bc597
+      lastState: {}
+      name: ca
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T12:58:47Z"
+    hostIP: 10.144.215.158
+    initContainerStatuses:
+    - containerID: containerd://209c9bf25c015ac347492dda1c558f27237de76ea0eba395f6341e7fd16793c1
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-init@sha256:15ae38636e160ef3be1204b5263cb084a4d78d20f86ee9145768d54217292e7f
+      lastState: {}
+      name: init
+      ready: true
+      restartCount: 0
+      state:
+        terminated:
+          containerID: containerd://209c9bf25c015ac347492dda1c558f27237de76ea0eba395f6341e7fd16793c1
+          exitCode: 0
+          finishedAt: "2020-08-12T12:58:45Z"
+          reason: Completed
+          startedAt: "2020-08-12T12:58:45Z"
+    phase: Running
+    podIP: 172.30.167.83
+    podIPs:
+    - ip: 172.30.167.83
+    qosClass: Burstable
+    startTime: "2020-08-12T12:58:42Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: ibm-privileged-psp
+      productChargedContainers: peer
+      productID: 54283fa24f1a4e8589964e6e92626ec4
+      productMetric: VIRTUAL_PROCESSOR_CORE
+      productName: IBM Blockchain Platform
+      productVersion: "2.5"
+    creationTimestamp: "2020-08-12T13:33:50Z"
+    generateName: peerorg1-57b5b4f6df-
+    labels:
+      app: peerorg1
+      app.kubernetes.io/instance: ibppeer
+      app.kubernetes.io/managed-by: ibp-operator
+      app.kubernetes.io/name: ibp
+      creator: ibp
+      orgname: org1msp
+      pod-template-hash: 57b5b4f6df
+    name: peerorg1-57b5b4f6df-nxrrt
+    namespace: n105f5e
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: peerorg1-57b5b4f6df
+      uid: 811edc45-0b6a-459f-87e3-75711486e3ce
+    resourceVersion: "202012"
+    selfLink: /api/v1/namespaces/n105f5e/pods/peerorg1-57b5b4f6df-nxrrt
+    uid: 39b4c76f-9fbb-4713-9588-5a17bf07e262
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: failure-domain.beta.kubernetes.io/zone
+              operator: In
+              values:
+              - mil01
+            - key: failure-domain.beta.kubernetes.io/region
+              operator: In
+              values:
+              - eu-de
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: orgname
+                operator: In
+                values:
+                - org1msp
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    containers:
+    - args:
+      - --log-driver
+      - fluentd
+      - --log-opt
+      - fluentd-address=localhost:9880
+      - --mtu
+      - "1400"
+      env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-dind:1.4.7-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: 2375
+        timeoutSeconds: 5
+      name: dind
+      ports:
+      - containerPort: 2375
+        protocol: TCP
+      readinessProbe:
+        exec:
+          command:
+          - readiness.sh
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: true
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    - env:
+      - name: LICENSE
+        value: accept
+      - name: CORE_PEER_LISTENADDRESS
+        value: 0.0.0.0:7051
+      - name: CORE_PEER_CHAINCODELISTENADDRESS
+        value: 0.0.0.0:7052
+      - name: CORE_CHAINCODE_GOLANG_RUNTIME
+        value: golangruntime:latest
+      - name: CORE_CHAINCODE_CAR_RUNTIME
+        value: carruntime:latest
+      - name: CORE_CHAINCODE_JAVA_RUNTIME
+        value: javaruntime:latest
+      - name: CORE_CHAINCODE_NODE_RUNTIME
+        value: noderuntime:latest
+      - name: CORE_CHAINCODE_BUILDER
+        value: builder:latest
+      - name: CORE_CHAINCODE_GOLANG_DYNAMICLINK
+        value: "true"
+      - name: CORE_VM_DOCKER_ATTACHSTDOUT
+        value: "false"
+      - name: CORE_PEER_MSPCONFIGPATH
+        value: /certs/msp
+      - name: CORE_PEER_FILESYSTEMPATH
+        value: /data/peer/
+      - name: CORE_CHAINCODE_EXECUTETIMEOUT
+        value: 60s
+      - name: CORE_PEER_TLS_ENABLED
+        value: "true"
+      - name: CORE_PEER_TLS_CERT_FILE
+        value: /certs/tls/signcerts/cert.pem
+      - name: CORE_PEER_TLS_KEY_FILE
+        value: /certs/tls/keystore/key.pem
+      - name: CORE_PEER_TLS_ROOTCERT_FILE
+        value: /certs/tls/cacerts/cacert-0.pem
+      - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
+        value: localhost:5984
+      - name: CORE_LEDGER_STATE_COUCHDBCONFIG_MAXRETRIESONSTARTUP
+        value: "20"
+      - name: ADD_MORE_USERS
+        value: "true"
+      - name: NUM_USERS
+        value: "1"
+      - name: COUCHDB1_USER
+        value: peer-temp
+      - name: COUCHDB1_PASSWORD
+        value: pass-temp
+      - name: FABRIC_CFG_PATH
+        value: /certs
+      - name: CORE_OPERATIONS_LISTENADDRESS
+        value: 0.0.0.0:9443
+      - name: CORE_OPERATIONS_TLS_ENABLED
+        value: "true"
+      - name: CORE_OPERATIONS_TLS_CERT_FILE
+        value: /certs/tls/signcerts/cert.pem
+      - name: CORE_OPERATIONS_TLS_KEY_FILE
+        value: /certs/tls/keystore/key.pem
+      - name: CORE_OPERATIONS_TLS_CLIENTAUTHREQUIRED
+        value: "false"
+      - name: CORE_OPERATIONS_TLS_CLIENTROOTCAS_FILES
+        value: /certs/tls/cacerts/cacert-0.pem
+      - name: GROUP_ID
+        value: "0"
+      - name: USER_ID
+        value: "0"
+      - name: USERNAME
+        value: root
+      - name: CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME
+        value: rjpbv6eDEF1y4MUQTktjf1YtAI4sEOO1
+      - name: CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+        value: ji0fr8jiUIaM9R9eot9ft5Kk18gxMqm5
+      - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
+        value: 159.122.179.234:30116
+      - name: CORE_PEER_GOSSIP_ENDPOINT
+        value: 159.122.179.234:30116
+      - name: CORE_PEER_LOCALMSPID
+        value: org1msp
+      - name: CORE_METRICS_PROVIDER
+        value: prometheus
+      - name: CORE_LEDGER_STATE_STATEDATABASE
+        value: CouchDB
+      - name: CORE_VM_ENDPOINT
+        value: localhost:2375
+      - name: RESTART_OLD_RESOURCEVER
+        value: "201865"
+      image: us.icr.io/ibp2/ibp-peer:1.4.7-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      name: peer
+      ports:
+      - containerPort: 7051
+        name: peer
+        protocol: TCP
+      - containerPort: 7052
+        name: chaincodelisten
+        protocol: TCP
+      - containerPort: 9443
+        name: operations
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: operations
+          scheme: HTTPS
+        initialDelaySeconds: 26
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: fabric-peer-0
+        subPath: data
+      - mountPath: /certs/msp/cacerts
+        name: ecert-cacerts
+      - mountPath: /certs/msp/signcerts
+        name: ecert-signcert
+      - mountPath: /certs/tls/cacerts
+        name: tls-cacerts
+      - mountPath: /certs/tls/keystore
+        name: tls-keystore
+      - mountPath: /certs/tls/signcerts
+        name: tls-signcert
+      - mountPath: /certs
+        name: peer-config
+      - mountPath: /certs/msp
+        name: peer-config
+      - mountPath: /certs/msp/admincerts
+        name: ecert-admincerts
+      - mountPath: /certs/msp/keystore
+        name: ecert-keystore
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    - env:
+      - name: LICENSE
+        value: accept
+      - name: BACKEND_ADDRESS
+        value: 127.0.0.1:7051
+      - name: SERVER_TLS_CERT_FILE
+        value: /certs/tls/signcerts/cert.pem
+      - name: SERVER_TLS_KEY_FILE
+        value: /certs/tls/keystore/key.pem
+      - name: SERVER_TLS_CLIENT_CA_FILES
+        value: /certs/tls/cacerts/cacert-0.pem
+      - name: SERVER_BIND_ADDRESS
+        value: 0.0.0.0
+      - name: SERVER_HTTP_DEBUG_PORT
+        value: "8080"
+      - name: SERVER_HTTP_TLS_PORT
+        value: "7443"
+      - name: BACKEND_TLS
+        value: "true"
+      - name: SERVER_HTTP_MAX_WRITE_TIMEOUT
+        value: 5m
+      - name: SERVER_HTTP_MAX_READ_TIMEOUT
+        value: 5m
+      - name: USE_WEBSOCKETS
+        value: "true"
+      - name: EXTERNAL_ADDRESS
+        value: 159.122.179.234:30116
+      image: us.icr.io/ibp2/ibp-grpcweb:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        httpGet:
+          path: /settings
+          port: https
+          scheme: HTTPS
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      name: proxy
+      ports:
+      - containerPort: 8080
+        name: http
+        protocol: TCP
+      - containerPort: 7443
+        name: https
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /settings
+          port: https
+          scheme: HTTPS
+        initialDelaySeconds: 26
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /certs/tls/signcerts
+        name: tls-signcert
+      - mountPath: /certs/tls/keystore
+        name: tls-keystore
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    - env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-fluentd:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: 9880
+        timeoutSeconds: 5
+      name: chaincode-logs
+      ports:
+      - containerPort: 9880
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 26
+        periodSeconds: 5
+        successThreshold: 1
+        tcpSocket:
+          port: 9880
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /fluentd/etc
+        name: fluentd-config
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    - env:
+      - name: LICENSE
+        value: accept
+      - name: COUCHDB_USER
+        value: rjpbv6eDEF1y4MUQTktjf1YtAI4sEOO1
+      - name: COUCHDB_PASSWORD
+        value: ji0fr8jiUIaM9R9eot9ft5Kk18gxMqm5
+      image: us.icr.io/ibp2/ibp-couchdb:2.3.1-20200714-amd64
+      imagePullPolicy: Always
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 6
+        successThreshold: 1
+        tcpSocket:
+          port: 5984
+        timeoutSeconds: 5
+      name: couchdb
+      ports:
+      - containerPort: 5984
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 56
+        periodSeconds: 5
+        successThreshold: 1
+        tcpSocket:
+          port: 5984
+        timeoutSeconds: 5
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4096M
+        requests:
+          cpu: 10m
+          memory: 10M
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_BIND_SERVICE
+          - CHOWN
+          - DAC_OVERRIDE
+          - SETGID
+          - SETUID
+          - FOWNER
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 5984
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /opt/couchdb/data
+        name: db-data
+        subPath: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: ibp-ibmregistry
+    initContainers:
+    - command:
+      - sh
+      - -c
+      - chmod -R 775 /data/ && chown -R -H 1000:1000 /data/
+      env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      name: init
+      resources:
+        limits:
+          cpu: 200m
+          memory: 400M
+        requests:
+          cpu: 200m
+          memory: 400M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities:
+          add:
+          - CHOWN
+          - FOWNER
+          drop:
+          - ALL
+        privileged: true
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: fabric-peer-0
+        subPath: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    - command:
+      - sh
+      - -c
+      - chmod -R 775 /opt/couchdb/data/ && chown -R -H 5984:0 /opt/couchdb/data/
+      env:
+      - name: LICENSE
+        value: accept
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imagePullPolicy: Always
+      name: couchdbinit
+      resources:
+        limits:
+          cpu: 200m
+          memory: 400M
+        requests:
+          cpu: 200m
+          memory: 400M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities:
+          add:
+          - CHOWN
+          - FOWNER
+          drop:
+          - ALL
+        privileged: true
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /opt/couchdb/data
+        name: db-data
+        subPath: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: peerorg1-token-qtgnh
+        readOnly: true
+    nodeName: 10.144.215.158
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
+    serviceAccount: peerorg1
+    serviceAccountName: peerorg1
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 600
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 600
+    volumes:
+    - name: db-data
+      persistentVolumeClaim:
+        claimName: peerorg1-statedb-pvc
+    - name: fabric-peer-0
+      persistentVolumeClaim:
+        claimName: peerorg1-pvc
+    - configMap:
+        defaultMode: 420
+        name: peerorg1-fluentd
+      name: fluentd-config
+    - name: ecert-admincerts
+      secret:
+        defaultMode: 420
+        secretName: ecert-peerorg1-admincerts
+    - name: ecert-cacerts
+      secret:
+        defaultMode: 420
+        secretName: ecert-peerorg1-cacerts
+    - name: ecert-keystore
+      secret:
+        defaultMode: 420
+        secretName: ecert-peerorg1-keystore
+    - name: ecert-signcert
+      secret:
+        defaultMode: 420
+        secretName: ecert-peerorg1-signcert
+    - name: tls-cacerts
+      secret:
+        defaultMode: 420
+        secretName: tls-peerorg1-cacerts
+    - name: tls-keystore
+      secret:
+        defaultMode: 420
+        secretName: tls-peerorg1-keystore
+    - name: tls-signcert
+      secret:
+        defaultMode: 420
+        secretName: tls-peerorg1-signcert
+    - configMap:
+        defaultMode: 420
+        name: peerorg1-config
+      name: peer-config
+    - name: peerorg1-token-qtgnh
+      secret:
+        defaultMode: 420
+        secretName: peerorg1-token-qtgnh
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T13:34:06Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T13:37:30Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T13:37:30Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2020-08-12T13:34:01Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://2a1a2f7919cd57b00b4dbf7c58994119b895a1a0f11d21e69298e1e461a3f226
+      image: us.icr.io/ibp2/ibp-fluentd:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-fluentd@sha256:f13ba892fdd2243572351cea835e381c6853c106cab6aa7235f33c9cff09756f
+      lastState: {}
+      name: chaincode-logs
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T13:36:23Z"
+    - containerID: containerd://711eb402a2f7b7040efbea1bf35737759f912a21c02cf5b1f3abde6991bc4a52
+      image: us.icr.io/ibp2/ibp-couchdb:2.3.1-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-couchdb@sha256:1f424e1093ff8c78c35ca2a5a3f5d401691bec599bcfa3a7a7ffdb2300d01184
+      lastState: {}
+      name: couchdb
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T13:36:31Z"
+    - containerID: containerd://429943391708a5dd8db5093b1c98535501e70ada79b10c0f7bed8b55ed4890b6
+      image: us.icr.io/ibp2/ibp-dind:1.4.7-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-dind@sha256:cb819921eeb94f8ca8c932704fb42e05c5d2072808e84a5680d22f4a767db9f2
+      lastState: {}
+      name: dind
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T13:35:39Z"
+    - containerID: containerd://56b8e271b34a063c7e7eff5ee99e9757fa076f09609f74e00cabb53b623674a0
+      image: us.icr.io/ibp2/ibp-peer:1.4.7-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-peer@sha256:5da87c32c1f35ca34ad1e4df5a0610c58da1ffa2e4b6a21ca51ba8beb40c8d9f
+      lastState: {}
+      name: peer
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T13:35:49Z"
+    - containerID: containerd://cfeb0de9ac78771b95691f4925f2b8dae11044aa363224666dc87471f09c6094
+      image: us.icr.io/ibp2/ibp-grpcweb:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-grpcweb@sha256:c2287d8ad8ae1844c712bdd3fb91e6c0419abac0c05c9dc3a5795ed062379c7e
+      lastState: {}
+      name: proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2020-08-12T13:35:57Z"
+    hostIP: 10.144.215.158
+    initContainerStatuses:
+    - containerID: containerd://c662f7e49d83cf9a4cb4737ea5283cbba378e567b54a83ff1ba42489b70b3a04
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-init@sha256:15ae38636e160ef3be1204b5263cb084a4d78d20f86ee9145768d54217292e7f
+      lastState: {}
+      name: init
+      ready: true
+      restartCount: 0
+      state:
+        terminated:
+          containerID: containerd://c662f7e49d83cf9a4cb4737ea5283cbba378e567b54a83ff1ba42489b70b3a04
+          exitCode: 0
+          finishedAt: "2020-08-12T13:34:04Z"
+          reason: Completed
+          startedAt: "2020-08-12T13:34:04Z"
+    - containerID: containerd://3676437fa9c4248fe4c369e861fb5f23a5f469185492656cec9454c2c673e0fc
+      image: us.icr.io/ibp2/ibp-init:2.5.0-20200714-amd64
+      imageID: us.icr.io/ibp2/ibp-init@sha256:15ae38636e160ef3be1204b5263cb084a4d78d20f86ee9145768d54217292e7f
+      lastState: {}
+      name: couchdbinit
+      ready: true
+      restartCount: 0
+      state:
+        terminated:
+          containerID: containerd://3676437fa9c4248fe4c369e861fb5f23a5f469185492656cec9454c2c673e0fc
+          exitCode: 0
+          finishedAt: "2020-08-12T13:34:05Z"
+          reason: Completed
+          startedAt: "2020-08-12T13:34:05Z"
+    phase: Running
+    podIP: 172.30.167.84
+    podIPs:
+    - ip: 172.30.167.84
+    qosClass: Burstable
+    startTime: "2020-08-12T13:34:01Z"
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

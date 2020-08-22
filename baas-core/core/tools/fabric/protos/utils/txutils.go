@@ -16,7 +16,7 @@ import (
 	"github.com/hyperledger/fabric/common/crypto"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"
-	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
+	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
 )
 

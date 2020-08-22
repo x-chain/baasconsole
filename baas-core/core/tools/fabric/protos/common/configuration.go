@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/msp"
+	"github.com/hyperledger/fabric-protos-go/msp"
 )
 
 type DynamicConfigGroupFactory interface {

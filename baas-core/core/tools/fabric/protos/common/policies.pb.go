@@ -6,7 +6,7 @@ package common // import "github.com/x-chain/baasconsole/baas-core/core/tools/fa
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import msp "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/msp"
+import msp "github.com/hyperledger/fabric-protos-go/msp"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

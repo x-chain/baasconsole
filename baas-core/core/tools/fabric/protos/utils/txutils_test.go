@@ -15,7 +15,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	mockmsp "github.com/hyperledger/fabric/common/mocks/msp"
 	"github.com/hyperledger/fabric/common/util"
-	pb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
+	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/utils"
 	"github.com/stretchr/testify/assert"
 	cb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"

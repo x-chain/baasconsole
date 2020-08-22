@@ -55,6 +55,8 @@
   ```
 * 运行: kubectl create -f nginx-deployment.yaml
 
+kubectl apply -f nginx-deployment.yaml
+
 * 删除: kubectl delete -f nginx-deployment.yaml
 
 

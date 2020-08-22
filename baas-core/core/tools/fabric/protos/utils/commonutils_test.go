@@ -13,7 +13,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric/common/crypto"
-	pb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/peer"
+	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/stretchr/testify/assert"
 	cb "github.com/x-chain/baasconsole/baas-core/core/tools/fabric/protos/common"
 )
