@@ -5,11 +5,11 @@ go 1.12
 require (
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-contrib/sessions v0.0.0-20190512062852-3cb4c4f2d615 // indirect
-	github.com/gin-gonic/gin v1.4.0
-	github.com/go-delve/delve v1.4.0 // indirect
+	github.com/gin-gonic/gin v1.7.0
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 	github.com/spf13/viper v1.4.0
 	github.com/x-chain/baasconsole/baas-core v0.0.0
+	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect
 	k8s.io/api v0.0.0-20190703205437-39734b2a72fe
 	k8s.io/apimachinery v0.0.0-20190703205208-4cfb76a8bf76
 	k8s.io/client-go v12.0.0+incompatible // indirect
